@@ -80,6 +80,11 @@ h6{font-size: 0.93721rem;}
 
 /*=====  END OF 1. BASIC STYLES  ======*/
 
+/*=========================================
+=            2. FLEXBOX STYLES            =
+=========================================*/
+/*flexbox styles are now in their own stylesheet at ../flexbox.css*/
+/*=====  End of 2. FLEXBOX STYLES  ======*/
 
 /*============================================================================
 =           3. MAPPLIC MAP STYLES
