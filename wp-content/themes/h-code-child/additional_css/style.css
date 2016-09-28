@@ -5,9 +5,14 @@
  Author:Nick Mortensen
  Author URI:http://nickmortensen.com
  Template:h-code
- Version:1.6.0
+ Version:1.6.0.1
  Text Domain:h-code-child
 
+
+*+++++++++++++++++++++++++
+== note that these appear in a subfolder of my child theme and are called by the style.css sheet in the direct folder of my child theme -- also named style.css=
++++++++++++++++++++++++++++*
+*
  1. BASIC STYLES
  2. FLEXBOX STYLES
  3. MAPPLIC STYLES
@@ -20,7 +25,7 @@
 10. JONES OFFERINGS
 11. OWL CAROUSEL STYLES
 12. BUTTON STYLES
-13. Masonry Portfolio Styles
+13. MASONRY PORTFOLIO STYLES
 14. IMAGE FILTERS
 15. STAFF POST TYPE STYLES
 16. PROJECT PORTFOLIO STYLES
@@ -36,13 +41,7 @@
 26. FRONTPAGE STYLES
 28. PORTFOLIO / PAGE NAVIGATION STYLES
 
-*/
-/*@import url("../h-code/style.css");
-@import url("style_2.css");
-@import url("flexbox.css");
-@import url("creative-links.css");*/
-/*@import url("../h-code/assets/css/responsive.css");
-@import url("assets/css/responsive.css");*/
+
 /*=====================================
 =            1. BASIC STYLES            =
 =====================================*/
