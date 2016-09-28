@@ -1,0 +1,56 @@
+/* Print Styles */
+@media print{
+	body {
+		background:white;
+		color:black;
+		margin:0;
+	}
+	navbar navbar-default.navbar-fixed-top.nav-transparent.overlay-nav.sticky-nav.nav-border-bottom.nav-light-transparent.nav-black.shrink-nav > * {display:none;}
+	#header   {display:none;}
+	#content  {display:none;}
+	#comments {display:none;}
+	#sidebar  {display:none;}
+	#footer   {display:none;}
+	div.blog-details-text.portfolio-single-content{display:none;}
+	div#quote-container{display:none;}
+	/*the print button itself doesn't need to be displayed*/
+	span.pdf-button div.printfriendly.pf-aligncenter>a{disply:none;}
+	/*from http://cdn.printfriendly.com/assets/versions/2016-09-22-131724331/main.css*/
+	body#pf-body {
+	    margin: 24px 32px 0;
+	    padding: 0;
+	    background-color: #0273b9;
+	    color: #080000;
+	    font-family: Arial, Georgia,Serif;
+	    font-size: 14px;
+	    line-height: 1.36;
+	    cursor: default;
+	    text-rendering: optimizelegibility;
+	    zoom: 1!important;
+	    display:-webkit-flex;display:-ms-flexbox;display:flex;
+	    -webkit-flex-flow:column nowrap;-ms-flex-flow:column nowrap;flex-flow:column nowrap;
+	}
+
+/*see http://wphacks.com/how-to-creating-a-print-stylesheet-in-wordpress/*/
+div#print-content{
+	width:100%;
+	margin:0;
+	float:none;
+}
+/*make sure all links, regardless of stae look alike*/
+div#print-content a:link, a:visited {color: #000000}
+
+	#print-header {
+		min-width:100%;
+		height: 240px;
+	}
+	#print-quote{ color: black; }
+	#print-quote blockquote.print-only{
+		color:black;
+	}
+img.pdf-print-link{display:none;}
+.hide-print{display:none;}
+
+
+
+}/*end print styles*/

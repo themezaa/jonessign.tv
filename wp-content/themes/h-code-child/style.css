@@ -1,0 +1,17 @@
+/*
+ Theme Name: H-Code Child
+ Description: Child theme for H-Code theme
+ License: Themeforest Split Licence
+ Author: Themezaa
+ Author URI: http://www.themezaa.com
+ Template: h-code
+ Version: 1.6
+ last update:  07_September_2016
+ Text Domain: h-code-child
+*/
+@charset "utf-8";
+@import url("additional_css/flexbox.css");
+@import url("../h-code/style.css");
+@import url("additional_css/style.css");
+@import url("additional_css/style_2.css");
+@import url("additional_css/print.css"); /*print*/

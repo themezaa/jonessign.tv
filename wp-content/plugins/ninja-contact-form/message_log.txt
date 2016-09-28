@@ -1,0 +1,9 @@
+#July 20th 2016, 01:33
+Subject: Test Email From NK:Contact Form
+Sender: Name
+User wants to subscribe: No
+Email: test@ninjakick.com
+Message: Test message
+
+
+

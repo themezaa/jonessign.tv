@@ -1,0 +1,13 @@
+/*
+ Theme Name:H-Code Child
+ Description:Nick Mortensen's project-style for the h-code child theme
+ License:Themeforest Split Licence
+ Author:Nick Mortensen
+ Author URI:http://www.nickmortensen.com
+ Template:h-code
+ Version:1.3.0
+ Text Domain:h-code-child
+*/
+section.container.flex-container{
+	background: #0273b9;
+}

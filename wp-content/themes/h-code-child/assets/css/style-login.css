@@ -1,0 +1,33 @@
+/*
+ Theme Name: H-Code Child
+ Description: Nick Mortensen's Custom Login Theme for H-Code theme
+ License: Themeforest Split Licence
+ Author: Nick Mortensen
+ Author URI: http://www.nickmortensen.com
+ Template: h-code
+ Version: 1.3.0
+ Text Domain: h-code-child
+*/
+body.login { background: blue; }
+body.login div#login {}
+body.login div#login h1 {}
+body.login div#login h1 a {}
+body.login div#login form#loginform {}
+body.login div#login form#loginform p {}
+body.login div#login form#loginform p label {}
+body.login div#login form#loginform input {}
+body.login div#login form#loginform input#user_login {}
+body.login div#login form#loginform input#user_pass {}
+body.login div#login form#loginform p.forgetmenot {}
+body.login div#login form#loginform p.forgetmenot input#rememberme {}
+body.login div#login form#loginform p.submit {}
+body.login div#login form#loginform p.submit input#wp-submit {}
+body.login div#login p#nav {}
+body.login div#login p#nav a {}
+body.login div#login p#backtoblog {}
+body.login div#login p#backtoblog a {}
+.login #nav a,
+.login #backtoblog a {
+	text-decoration: none;
+	color: #0273b9;
+}

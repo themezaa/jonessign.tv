@@ -1,0 +1,72 @@
+/*= =====================================
+=            FLEXBOX STYLES           =
+======================================*/
+/*----------  declare the element should be a flexbox  ----------*/
+.flex   {display:-webkit-flex;display:-ms-flexbox;display:flex;}
+
+/*----------  MAIN AXIS *declare whether the items inside of it should in a row(across) or column (down) *----------*/
+.row-nw {-webkit-flex-flow:row nowrap;-ms-flex-flow:row nowrap;flex-flow:row nowrap;}
+.col-nw {-webkit-flex-flow:column nowrap;-ms-flex-flow:column nowrap;flex-flow:column nowrap;}
+.col-wrap{-webkit-flex-flow:column wrap;-ms-flex-flow:column wrap;flex-flow:column wrap;}
+.row-wrap{-webkit-flex-flow:row wrap;-ms-flex-flow:row wrap;flex-flow:row wrap;}
+
+/*----------  Justify Content is For MAIN AXIS  ----------*/
+.justify-content-space-around  {-webkit-justify-content:space-around;-ms-flex-pack:distribute;justify-content:space-around;}
+.justify-content-space-between {-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;}
+.justify-content-start         {-webkit-justify-content:flex-start;-ms-flex-pack:start;justify-content:flex-start;}
+.justify-content-end           {-webkit-justify-content:flex-end;-ms-flex-pack:end;justify-content:flex-end;}
+.justify-content-center        {-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;}
+/*simplified classes*/
+.justify-space-around  {-webkit-justify-content:space-around;-ms-flex-pack:distribute;justify-content:space-around;}
+.justify-space-between {-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;}
+.justify-start         {-webkit-justify-content:flex-start;-ms-flex-pack:start;justify-content:flex-start;}
+.justify-end           {-webkit-justify-content:flex-end;-ms-flex-pack:end;justify-content:flex-end;}
+.justify-center        {-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;}
+
+
+/*---  ALIGN ITEMS IS FOR SECONDARY AXIS  ----------*/
+.align-items-space-around  {-webkit-align-items:space-around;-ms-flex-align:space-around;align-items:space-around;}
+.align-items-space-between {-webkit-align-items:space-between;-ms-flex-align:space-between;align-items:space-between;}
+.align-items-start         {-webkit-align-items:flex-start;-ms-flex-align:start;align-items:flex-start;}
+.align-items-end           {-webkit-align-items:flex-end;-ms-flex-align:end;align-items:flex-end;}
+.align-items-center        {-webkit-align-items:center;-ms-flex-align:center;align-items:center;}
+.align-items-stretch       {-webkit-align-items:stretch;-ms-flex-align:stretch;align-items:stretch;}
+.align-items-baseline      {-webkit-align-items:baseline;-ms-flex-align:baseline;align-items:baseline;}
+
+/*---  ALIGN CONTENT FOR CONTENT THAT WRAPS: Applies When a Wrapped Item has Extra Space  ----------*/
+.align-content-space-around  {-ms-flex-line-pack:distribute;-webkit-align-content:space-around;align-content:space-around;}
+.align-content-space-between {-ms-flex-line-pack:justify;-webkit-align-content:space-between;align-content:space-between;}
+.align-content-start         {-ms-flex-line-pack:start;-webkit-align-content:flex-start;align-content:flex-start;}
+.align-content-end           {-ms-flex-line-pack:end;-webkit-align-content:flex-end;align-content:flex-end;}
+.align-content-center        {-ms-flex-line-pack:center;-webkit-align-content:center;align-content:center;}
+
+/*simplified align content classes*/
+.content-space-around  {-ms-flex-line-pack:distribute;-webkit-align-content:space-around;align-content:space-around;}
+.content-space-between {-ms-flex-line-pack:justify;-webkit-align-content:space-between;align-content:space-between;}
+.content-start         {-ms-flex-line-pack:start;-webkit-align-content:flex-start;align-content:flex-start;}
+.content-end           {-ms-flex-line-pack:end;-webkit-align-content:flex-end;align-content:flex-end;}
+.content-center        {-ms-flex-line-pack:center;-webkit-align-content:center;align-content:center;}
+
+/*------CHILD ITEM STYLES-----*/
+
+/*----------  Align Self is for CHILD ITEMS , it OVERRIDES 'Align-Items'  ----------*/
+.align-self-start   {-ms-flex-item-align:start;-webkit-align-self:start;align-self:start;}
+.align-self-end     {-ms-flex-item-align:end;-webkit-align-self:end;align-self:end;}
+.align-self-center  {-ms-flex-item-align:center;-webkit-align-self:center;align-self:center;}
+.align-self-stretch {-ms-flex-item-align:stretch;-webkit-align-self:stretch;align-self:stretch;}
+
+/*----------  HOW SHOULD THIS CHILD ITEM GROW IN PROPORTION -- defaults to one, proportionate to one  ----------*/
+.grow-1{-webkit-flex-grow:1;-ms-flex-positive:1;flex-grow:1;}
+.grow-2{-webkit-flex-grow:2;-ms-flex-positive:2;flex-grow:2;}
+.grow-3{-webkit-flex-grow:3;-ms-flex-positive:3;flex-grow:3;}
+.grow-4{-webkit-flex-grow:4;-ms-flex-positive:4;flex-grow:4;}
+
+/*----------  ORDER of a CHILD ITEM
+defaults to 1, so a negative number would go first ----------*/
+.order-minus-one {-webkit-order:-1;-ms-flex-order:-1;order:-1;}
+.order-one       {-webkit-order:1;-ms-flex-order:1;order:1;}
+.order-two       {-webkit-order:2;-ms-flex-order:2;order:2;}
+.order-three     {-webkit-order:3;-ms-flex-order:3;order:3;}
+.order-last      {-webkit-order:25;-ms-flex-order:25;order:25;}
+/*=====  END OF 2. FLEXBOX STYLES  ======*/
+
