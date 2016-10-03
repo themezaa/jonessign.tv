@@ -91,10 +91,19 @@ if ( !defined('ABSPATH') )
 
 /** Sets up WordPress vars and included files. */
 require_once(ABSPATH . 'wp-settings.php');
-//define( 'DISABLE_PDF_CACHE', true );
-/*** defines specifically for the pdf-templates plugin using dompdf **/
-// use landscape A4 sized paper @ 180 DPI
-define('DOMPDF_PAPER_SIZE', array(0,0,850,1600));
-define('DOMPDF_PAPER_ORIENTATION', 'portrait');
+/*================================================================================
+=            WP-PDF-Plugin Configuration options as recommended in wp-content/plugins/wp-pdf-templates/readme.txt  Note line 65 if you think it is weird to place settings for a plugin in you main config file.
+*             =
+================================================================================*/
+
+// DPI and PPI - are they the same thing?
 define('DOMPDF_DPI', 180);
+// if the post type for athe PDF is access restricted, then set te following to "true"
+define('FETCH_COOKIES_ENABLED', true);
+// this is so I don't have to keep deleting from the cache while developing the templates for PDFs of Portfolio pages.  Can be commented out in a live environment most likely.
+define( 'DISABLE_PDF_CACHE', true );
+
+
+
+
 

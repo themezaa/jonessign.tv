@@ -16,9 +16,47 @@
 */
 
 function jones_custom_posttypes() {
-	//QTY of 4 custom post types: 'staff', 'position', 'testimonial','location'
-	//
-	//$labels for staff post type will be called within the $args array for the staff post type
+	//QTY of 5 custom post types: 'sign',staff', 'position', 'testimonial','location'
+	// BEGIN SIGN POST TYPE DEFINITION
+		//sign type post type labels
+	$labels = array(
+				'name'               => _x( 'Sign Type','post type general name', 'Jones' ),
+				'singular_name'      => _x( 'Sign Type', 'post type singular name', 'Jones' ),
+				'menu_name'          => _x( 'Sign Type', 'Jones' ),
+				'name_admin_bar'     => _x( 'Sign Type', 'add new on admin bar', 'Jones'),
+				'add_new'            => _x( 'Add New', 'staff', 'jones', 'Jones' ),
+				'add_new_item'       => __( 'Add Sign Type', 'Jones' ),
+				'new_item'           => __( 'New Sign Type', 'Jones'),
+				'edit_item'          => __( 'Edit Sign Type', 'Jones' ),
+				'view_item'          => __( 'View Sign Type', 'Jones' ),
+				'all_items'          => __( 'All Sign Type', 'Jones'),
+				'search_items'       => __( 'Search Sign Type', 'Jones' ),
+				'parent_item_colon'  => __( 'Parent Sign Type:', 'Jones' ),
+				'not_found'          => __( 'No Sign Type found', 'Jones' ),
+				'not_found_in_trash' => __( 'No Sign Type found in Trash', 'Jones' ),
+			);
+	//$args array for sign types call $labels variable above
+	$args = array(
+				'can_export'          => true,
+				'description'         => __( 'Sign Type Info', 'Jones'),
+				'has_archive'         => true,
+				'labels'              => $labels,
+				'menu_icon'           => 'dashicons-editor-table',
+				'menu_position'       => 5,
+				'public'              => true,
+				'rewrite'             => array( 'slug' => 'sign' ),
+				'show_in_admin_bar'   => true,
+				'show_in_menu'        => true,
+				'show_in_rest' => true,
+				'supports'            => array('title', 'author', 'excerpt','editor', 'thumbnail', 'custom-fields', 'page-attributes', 'post-formats'),
+				'taxonomies'          => array ('category', 'post-tag'),
+			);// END POST TYPE SIGN
+
+	// registers sign type custom post type
+	// may not need sign type as a custom post.  It is possible that this is better to be just a taxonomy that media items and portfolio items can be assigned to.
+	register_post_type( 'sign', $args );
+
+	//BEGIN STAFF POST TYPE DEFINITION
 	$labels = array(
 				'name'               => _x( 'Staff','post type general name', 'Jones' ),
 				'singular_name'      => _x( 'Staffmember', 'post type singular name', 'Jones' ),
@@ -35,7 +73,7 @@ function jones_custom_posttypes() {
 				'not_found'          => __( 'No Staff found', 'Jones' ),
 				'not_found_in_trash' => __( 'No Staff found in Trash', 'Jones' ),
 			);
-	//$args array for staff calles $labels variable above
+	//$args array for staff calls $labels variable above
 	$args = array(
 				'can_export'          => true,
 				'description'         => __( 'Staff Member information', 'Jones'),
@@ -259,6 +297,45 @@ function jones_custom_taxonomies() {
 		'update_count_callback' => '_update_post_term_count',
 	);
 	register_taxonomy('location', array('position', 'jones-location', 'staff'), $args );
+	// END LOCATION TAXONOMY REGISTRATION
+	//
+	// BEGIN CUSTOM TAXONOMY FOR SIGN TYPE
+
+	$labels = array(
+		'add_new_item'               => __( 'Add Sign Type Tag', 'Jones' ),
+		'add_or_remove_items'        => __( 'Add or Remove Tag - Sign Type', 'Jones' ),
+		'all_items'                  => __( 'All Sign Type Tags', 'Jones' ),
+		'choose_from_most_used'      => __( 'Frequently Used Sign Type Tags', 'Jones' ),
+		'edit_item'                  => __( 'Edit Sign Type', 'Jones' ),
+		'items_list'                 => __( 'Sign Type Tag list', 'Jones' ),
+		'items_list_navigation'      => __( 'Sign Types Tag list Nav', 'Jones' ),
+		'menu_name'                  => __( 'Tags - Sign Types', 'Jones' ),
+		'name'                       => _x( 'Sign Type', 'Taxonomy General Name', 'Jones' ),
+		'new_item_name'              => __( 'New Sign Type Tag', 'Jones' ),
+		'no_terms'                   => __( 'No Sign Type Tags', 'Jones' ),
+		'not_found'                  => __( 'Sign Type Tag Not Found', 'Jones' ),
+		'popular_items'              => __( 'Popular Sign Type Tags', 'Jones' ),
+		'search_items'               => __( 'Search Sign Type Tags', 'Jones' ),
+		'separate_items_with_commas' => __( 'Separate Sign Type Tags with commas', 'Jones' ),
+		'singular_name'              => _x( 'Sign Type', 'Taxonomy Singular Name', 'Jones' ),
+		'update_item'                => __( 'Update Sign Type Tag', 'Jones' ),
+		'view_item'                  => __( 'View Sign Type Tag', 'Jones' ),
+	);
+	$args = array(
+		'hierarchical'          => false,
+		'description'			=> 'Apply sign type to photos and portfolio pages.',
+		'labels'                => $labels,
+		'public'                => true,
+		'query_var'             => true,
+		'rewrite'               => array( 'slug' => 'sign-type' ),
+		'show_admin_column'     => true,
+		'show_in_nav_menus'     => true,
+		'show_tagcloud'         => true,
+		'show_ui'               => true,
+		'update_count_callback' => '_update_post_term_count',
+	);
+	register_taxonomy('sign_type', array('portfolio', 'sign','attachment'), $args );
+	// END REGISTER TAXONOMY FOR SIGNTYPE
 }
  // note that these taxonomy are stored in the #_term_taxonomy table in the db within the taxonomy column
  // if I change the slug name, I have to alter the entry in the #_term_taxonomy.taxonomy table similarly or I lose what I've entered

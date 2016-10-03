@@ -71,7 +71,7 @@ add_filter( 'login_headertitle', 'jones_login_headertitle'  );
 // so I can just slap a mapplic map in a template page
 $jones_map = do_shortcode('[mapplic id="4" h="800"]');
 
-//get rid of a couple of columns on the backend for the staff post type
+//remove columns on the backend for the staff post type
 function set_custom_edit_staffmember_columns($columns) {
 	// comment out the columns you wisht o keep
 	unset( $columns['cb'] ); // refers to checkbox on left
@@ -85,6 +85,62 @@ function set_custom_edit_staffmember_columns($columns) {
 }
 // now to add the filter
 add_filter( 'manage_staff_posts_columns' ,'set_custom_edit_staffmember_columns' );
+/**
+ *
+ * Sign Types - as they are limited in number, should probably not have a custom post type and instead should be a beefed up tag using the sign_type taxonomy.  I would need a text field with a definition, a text field with use cases or use scenarios, and a large scale header photo
+ *
+ */
+
+// add fields to taxonomy definition page for sign_type taxonomy
+// see: http://wordpress.stackexchange.com/questions/689/adding-fields-to-the-category-tag-and-custom-taxonomy-edit-screen-in-the-wordpr
+add_action('sign_type_edit_form_fields', 'category_edit_form_fields');
+add_action('sign_type_edit_form', 'category_edit_form');
+add_action('add_sign_type_form_fields', 'category_edit_form_fields');
+add_action('sign_type_add_form', 'category_edit_form');
+
+function sign_type_add_form() {
+        ?>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        jQuery('#edittag').attr( "enctype", "multipart/form-data").attr("encoding","multipart/form-data" );
+    });
+</script>
+    <?php
+}
+
+function add_sign_type_form_fields() {
+    ?>
+        <tr className="form-field">
+            <th valign="top" scope="row">
+                <label for="sign_type_tag_photo" ><?php _e('Picture for this Sign Type Tag',''); ?></label>
+            </th>
+            <td>
+                <input type="file" id="sign_type_tag_photo" name="sign_type_tag_photo"/>
+            </td>
+             <th>
+                <label for="sign_type_tag_definition"><?php _e('Definition of this Sign Type',''); ?></label>
+            </th>
+            <td>
+                <input type="text" id="sign_type_tag_definition" name="sign_type_tag_definition">
+            </td>
+            <th>
+                <label for="sign_type_tag_uses"><?php _e('Use Cases for this Sign Type',''); ?></label>
+            </th>
+            <td>
+                <input type="text" id="sign_type_tag_uses" name="sign_type_tag_uses">
+            </td>
+        </tr>
+
+    <?php
+}
+
+
+
+
+
+
+
+
 
 /**
  *
@@ -126,167 +182,3 @@ function jones_custom_taxonomies_terms_links() {
 	}
 	return implode( '', $out );
 }
-
-// end jones_custom_taxonomies_terms_links()
-
-/**
- *
- * get related post for custom port type using my custom taxonomy
- * see http://isabelcastillo.com/related-custom-post-type-taxonomy
- *
- */
-// get this custom post types taxonomy terms
-function jones_position_related_items(){
-$custom_taxterms = wp_get_object_terms( $post->ID, 'location', array('fields' => 'ids') );
-// arguments
-$args = array(
-              'post_type'      => 'position',
-              'post_status'    => 'publish',
-              'posts_per_page' => 3,
-              'orderby'        => 'rand',
-              'tax_query'       => array(
-                                        array(
-                                              'taxonomy' => 'location',
-                                              'field'    => 'id',
-                                              'terms'    => $custom_taxterms,
-                                              )
-                                        ),
-              'post__not_in'   => array($post->ID),
-		); // end args array
-$related_items = new WP_QUERY( $args );
-//loop over  query
-if ($related_items->have_posts()):
-	echo '<ul>';
-	while ( $related_posts->have_posts() ) : $related_items->the_post();
-	?>
-	<li><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"> <?php the_title(); ?> </a></li>
-	<?php
-	endwhile;
-	echo '</ul>';
-endif;
-//reset the post data
-wp_reset_postdata();
-};
-
-// taken from themes/hcode/lib/hcode-extra-functions.php substituted position for portfolio
-/* just a sampling in a new file for clarity/* Single Portfolio Related Items */
-if ( ! function_exists( 'hcode_single_position_related_posts' ) ) :
-
-    function hcode_single_position_related_posts( $post_type = 'position', $number_posts = '3') {
-        global $post;
-        $args               = $output = '';
-        $related_post_terms = array();
-        $hcode_options = get_option( 'hcode_theme_setting' );
-
-        $title = (isset($hcode_options['hcode_related_title'])) ? $hcode_options['hcode_related_title'] : '';
-
-        $recent_post = new WP_Query();
-
-        if( $number_posts == 0 ) {
-            return $recent_post;
-        }
-        $terms = get_the_terms( get_the_ID() , 'location' );
-        if( $terms ):
-            foreach ($terms as $key => $value) {
-                $related_post_terms[] = $value->term_id;
-            }
-        endif;
-        $args = array(
-            'post_type'      => $post_type,
-            'posts_per_page' => $number_posts,
-            'post__not_in'   => array( get_the_ID() ),
-            'tax_query'      => array(
-                array(
-	                'taxonomy' => 'position',
-	                'terms'    => $related_post_terms,
-	                'field'    => 'term_id',
-                ),
-            ),
-            'meta_query' => array(
-                array(
-                    'key'       => 'hcode_link_type_single',
-                    'value'     => 'ajax-popup',
-                    'compare'   => '!=',
-                )
-            )
-        );
-
-        $recent_post = new WP_Query( $args );
-        if ( $recent_post->have_posts() ) {
-            $hcode_options  = get_option( 'hcode_theme_setting' );
-            //$enable_comment = hcode_option('hcode_enable_portfolio_comment');
-           $hcode_enable_position_comment = false;
-
-            $output .= '<div class="wpb_column vc_column_container col-md-12 no-padding"><div class="hcode-divider border-top sm-padding-five-top xs-padding-five-top padding-five-bottom"></div></div><section class="clear-both no-padding-top"><div class="container"><div class="row">';
-            $output .= '<div class="col-md-12 col-sm-12 text-center">';
-                $output .= '<h3 class="section-title">'.$title.'</h3>';
-            $output .= '</div>';
-            $output .='<div class="work-3col gutter work-with-title ipad-3col">';
-                $output .='<div class="col-md-12 grid-gallery overflow-hidden content-section hide-print">';
-                    $output .='<div class="tab-content">';
-                        $output .='<ul class="grid masonry-items">';
-                    while ( $recent_post->have_posts() ) : $recent_post->the_post();
-                   /* Image Alt, Title, Caption */
-                    $img_alt     = hcode_option_image_alt(get_post_thumbnail_id());
-                    $img_title   = hcode_option_image_title(get_post_thumbnail_id());
-                    $image_alt   = ( isset($img_alt['alt']) && !empty($img_alt['alt']) ) ? 'alt="'.$img_alt['alt'].'"' : 'alt=""' ;
-                    $image_title = ( isset($img_title['title']) && !empty($img_title['title']) ) ? ' title="'.$img_title['title'].'"' : '';
-
-
-                        $output .='<li class="position-id-'.get_the_ID().'">';
-                            $output .='<figure>';
-                                $position_image    = hcode_post_meta('hcode_image');
-                                $position_gallery  = hcode_post_meta('hcode_gallery');
-                                $position_link     = hcode_post_meta('hcode_link_type');
-                                $position_video    = hcode_post_meta('hcode_video');
-                                //$position_subtitle = hcode_post_meta('hcode_subtitle');
-                                $position_subtitle = 'Open Position';
-
-                                if(!empty($position_image)){
-                                    $thumb = wp_get_attachment_image_src( get_post_thumbnail_id(get_the_ID()), 'hcode-related-post' );
-                                    $url   = $thumb['0'];
-                                    if($url):
-                                        $output .= '<div class="gallery-img">';
-                                            $output .= '<a href="'.get_permalink().'">';
-                                                $output .= '<img src="' . $url . '" width="'.$thumb[1].'" height="'.$thumb[2].'" '.$image_alt.$image_title.'/>';
-                                            $output .= '</a>';
-                                        $output .= '</div>';
-                                    else :
-                                        $output .= '<div class="gallery-img">';
-                                            $output .= '<a href="'.get_permalink().'">';
-                                                $output .= '<img src="' . HCODE_THEME_ASSETS_URI . '/images/no-image-374x234.jpg" width="374" height="234"/>';
-                                            $output .= '</a>';
-                                        $output .= '</div>';
-                                    endif;
-                                }else{
-                                    $thumb = wp_get_attachment_image_src( get_post_thumbnail_id(get_the_ID()), 'hcode-related-post' );
-                                    $url = $thumb['0'];
-                                    $output .= '<div class="gallery-img">';
-                                        $output .= '<a href="'.get_permalink().'">';
-                                            if ( $url ) {
-                                                $output .= '<img src="' . $url . '" width="'.$thumb[1].'" height="'.$thumb[2].'" '.$image_alt.$image_title.'/>';
-                                            }
-                                            else {
-                                                $output .= '<img src="' . HCODE_THEME_ASSETS_URI . '/images/no-image-374x234.jpg" width="374" height="234"/>';
-                                            }
-                                        $output .= '</a>';
-                                    $output .= '</div>';
-                                }
-                                $output .= '<figcaption>';
-                                    $output .= '<h3><a href="'.get_permalink().'">'.get_the_title().'</a></h3>';
-                                    $output .= '<p>'.$position_subtitle.'</p>';
-                                $output .= '</figcaption>';
-                            $output .='</figure>';
-                        $output .='</li>';
-                    endwhile;
-                    wp_reset_postdata();
-                        $output .='</ul>';
-                    $output .='</div>';
-                $output .='</div>';
-            $output .='</div>';
-            $output .= '</div></div></section>';
-        echo $output;
-        }
-    }
-endif;
-

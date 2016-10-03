@@ -14,4 +14,5 @@
 @import url("../h-code/style.css");
 @import url("additional_css/style.css");
 @import url("additional_css/style_2.css");
-@import url("additional_css/print.css"); /*print*/
+@import url("additional_css/print.css");
+@import url("additional_css/sign.css");

@@ -1,4 +1,4 @@
-<?php 
+<?php
 //define("DOMPDF_TEMP_DIR", "/tmp");
 //define("DOMPDF_CHROOT", DOMPDF_DIR);
 //define("DOMPDF_FONT_DIR", DOMPDF_DIR."/lib/fonts/");
@@ -11,7 +11,7 @@
 //define("DOMPDF_DPI", 72);
 //define("DOMPDF_ENABLE_PHP", true);
 //define("DOMPDF_ENABLE_REMOTE", true);
-//define("DOMPDF_ENABLE_CSS_FLOAT", true);
+define("DOMPDF_ENABLE_CSS_FLOAT", true);
 //define("DOMPDF_ENABLE_JAVASCRIPT", false);
 //define("DEBUGPNG", true);
 //define("DEBUGKEEPTEMP", true);

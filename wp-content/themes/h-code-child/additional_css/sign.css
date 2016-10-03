@@ -1,0 +1,30 @@
+/*
+ Theme Name:H-Code Child
+ Description:Sign Post Type Specific CSS Types for JonesSign
+ License:Themeforest Split Licence
+ Author:Nick Mortensen
+ Author URI:http://nickmortensen.com
+ Template:h-code
+ Version:1.6.0.1
+ Text Domain:h-code-child
+*/
+/*1. Single Sign Page Styles*/
+#sign-type-single{
+	color:white;
+	height:100vh;
+	max-height:960px;
+	padding-left: 2vw;
+}
+#sign-type-header{
+	width:50%;
+}
+#sign-type-header>div>span{
+
+	border-bottom: 2px solid white;
+
+}
+
+.sign-type-header{
+	font-size: 1.25rem;
+	line-height:1.68rem;
+}
