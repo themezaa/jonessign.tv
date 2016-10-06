@@ -1,10 +1,17 @@
 <?php
 
+function Nextend_ET_Builder_Module_Smart_Slider_Field() {
+    $output = sprintf('<input type="button" class="button button-upload" value="%1$s" onclick="return NextendSmartSliderDiviModal(this);" />', 'Select Slider');
+
+    return $output;
+}
+
 class Nextend_ET_Builder_Module_Smart_Slider extends ET_Builder_Module {
 
     function init() {
         $this->name = 'Smart Slider 3';
         $this->slug = 'et_pb_nextend_smart_slider_3';
+        $this->post_types = array( EXTRA_LAYOUT_POST_TYPE );
 
         $this->whitelisted_fields = array(
             'slider',
@@ -29,19 +36,12 @@ class Nextend_ET_Builder_Module_Smart_Slider extends ET_Builder_Module {
     }
 
     function get_fields() {
-        global $wpdb;
-
-        $res     = $wpdb->get_results('SELECT id, title FROM ' . $wpdb->prefix . 'nextend2_smartslider3_sliders');
-        $options = array();
-        foreach ($res AS $r) {
-            $options[$r->id] = $r->title;
-        }
         $fields = array(
             'slider' => array(
-                'label'           => 'Slider',
-                'type'            => 'select',
-                'option_category' => 'basic_option',
-                'options'         => $options
+                'label'               => 'Slider',
+                'option_category'     => 'basic_option',
+                'renderer'            => 'Nextend_ET_Builder_Module_Smart_Slider_Field',
+                'renderer_with_field' => true
             )
         );
 
@@ -66,14 +66,18 @@ class Nextend_ET_Builder_Module_Smart_Slider_Fullwidth extends Nextend_ET_Builde
     }
 }
 
-function Nextend_et_builder_get_child_modules_fix($child_modules){
-    if($child_modules === ''){
+function Nextend_et_builder_get_child_modules_fix($child_modules) {
+    if ($child_modules === '') {
         $child_modules = array();
     }
     return $child_modules;
 }
 
-add_filter( 'et_builder_get_child_modules', 'Nextend_et_builder_get_child_modules_fix');
+add_filter('et_builder_get_child_modules', 'Nextend_et_builder_get_child_modules_fix');
+
+if(function_exists('et_fb_is_enabled') && et_fb_is_enabled()){
+    remove_shortcode('smartslider3');
+}
 
 new Nextend_ET_Builder_Module_Smart_Slider;
 new Nextend_ET_Builder_Module_Smart_Slider_Fullwidth;

@@ -1,6 +1,5 @@
 <?php
-class N2SSPluginItemIcon extends N2SSPluginItemAbstract
-{
+class N2SSPluginItemIcon extends N2SSPluginItemAbstract {
 
     public $_identifier = 'icon';
 
@@ -33,12 +32,19 @@ class N2SSPluginItemIcon extends N2SSPluginItemAbstract
     private function getHtml($slider, $data) {
         $svg = $data->get('icon', '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="32" height="32"><rect width="100" height="100" data-style="{style}" /></svg>');
 
-        list($color, $alpha) = N2Color::colorToSVG($data->get('color', '00000080'));
 
         list($width, $height) = (array)N2Parse::parse($data->get('size', '100%|*|auto'));
+        list($color, $alpha) = N2Color::colorToSVG($data->get('color', '00000080'));
         $style = 'fill:#' . $color . ';fill-opacity:' . $alpha;
 
+        list($colorHover, $alphaHover) = N2Color::colorToSVG($data->get('color-hover', '00000000'));
+        $styleHover = 'fill:#' . $colorHover . ';fill-opacity:' . $alphaHover;
+
         $styleClass = N2StyleRenderer::render($data->get('style'), 'heading', $slider->elementId, 'div#' . $slider->elementId . ' ');
+
+        if ($alphaHover != 0) {
+            $styleClass .= ' n2-ss-icon-has-hover';
+        }
         return '<span class="' . $styleClass . '" style="display:block;">' . N2Html::image('data:image/svg+xml;base64,' . base64_encode(str_replace(array(
                 'data-style',
                 '{style}'
@@ -46,9 +52,18 @@ class N2SSPluginItemIcon extends N2SSPluginItemAbstract
                 'style',
                 $style
             ), $svg)), 'Icon', array(
-            'class' => 'n2-ow',
-            'style' => 'display: inline-block;width:' . $width . ';height:' . $height . ';'
-        )) . '</span>';
+            'class' => 'n2-ow n2-ss-icon-normal',
+            'style' => 'width:' . $width . ';height:' . $height . ';'
+        )) . ($alphaHover == 0 ? '' : N2Html::image('data:image/svg+xml;base64,' . base64_encode(str_replace(array(
+                'data-style',
+                '{style}'
+            ), array(
+                'style',
+                $styleHover
+            ), $svg)), 'Icon', array(
+            'class' => 'n2-ow n2-ss-icon-hover',
+            'style' => 'width:' . $width . ';height:' . $height . ';'
+        ))) . '</span>';
     }
 
     public function getPath() {
@@ -57,11 +72,12 @@ class N2SSPluginItemIcon extends N2SSPluginItemAbstract
 
     function getValues() {
         return array(
-            'icon' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="32" height="32"><rect width="100" height="100" data-style="{style}" /></svg>',
-            'color' => '00000080',
-            'size' => '100%|*|auto',
-            'link' => '#|*|_self',
-            'style' => ''
+            'icon'        => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="32" height="32"><rect width="100" height="100" data-style="{style}" /></svg>',
+            'color'       => '00000080',
+            'color-hover' => '00000000',
+            'size'        => '100%|*|auto',
+            'link'        => '#|*|_self',
+            'style'       => ''
         );
     }
 

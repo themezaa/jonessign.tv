@@ -147,6 +147,7 @@ class N2SmartSliderImport {
             $slide['params']    = new N2Data($slide['params'], true);
             $slide['thumbnail'] = $this->fixImage($slide['thumbnail']);
             $slide['params']->set('backgroundImage', $this->fixImage($slide['params']->get('backgroundImage')));
+            $slide['params']->set('ligthboxImage', $this->fixImage($slide['params']->get('ligthboxImage')));
             $slide['params']->set('link', $this->fixLightbox($slide['params']->get('link')));
 
             $slide['slide'] = N2SmartSliderLayer::prepareImport($this, $slide['slide']);

@@ -172,18 +172,27 @@
   }
 
   .n2-ss-layers-container {
+    visibility: hidden;
     position: relative;
     width: 100%;
     height: 100%;
   }
 
+  [onclick].n2-ss-layers-container {
+    visibility: visible;
+  }
+
   .ssPerspective() when (@hasPerspective = 1) {
     .n2-ss-layers-container {
-        -webkit-perspective: @perspective;
-        perspective: @perspective;
+      -webkit-perspective: @perspective;
+      perspective: @perspective;
     }
   }
   .ssPerspective();
+
+  .n2-ss-layers-container > * {
+    visibility: visible;
+  }
 
   .n2-ss-layer {
     position: absolute;
@@ -398,6 +407,19 @@
     position: absolute;
     left: 50%;
     top: 50%;
+  }
+
+  .n2-ss-icon-normal {
+    display: inline-block;
+  }
+
+  .n2-ss-icon-hover,
+  .n2-ss-icon-has-hover:HOVER .n2-ss-icon-normal {
+    display: none;
+  }
+
+  .n2-ss-icon-has-hover:HOVER .n2-ss-icon-hover {
+    display: inline-block;
   }
 
 }

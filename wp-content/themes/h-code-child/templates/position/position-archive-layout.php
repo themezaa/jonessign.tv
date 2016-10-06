@@ -1,17 +1,17 @@
 <?php
 /**
  * displaying layout for archive & search page of the position custom post type
+ * based on the parent theme's /template/pages/layout.php page
  *
- * @package H-Code-child 1.6 last update  08_September_2016
+ * @package H-Code-child 1.6 last update   04_October_2016
  */
-
 get_header();
 
-$layout_settings       = $enable_container_fluid = $class_main_section = $section_class = $class = $output = $page = '';
+$layout_settings = $enable_container_fluid = $class_main_section = $section_class = $class = $output = $page = '';
 $layout_settings_inner = hcode_option('hcode_general_settings');
-$hcode_options         = get_option( 'hcode_theme_setting' );
+$hcode_options = get_option( 'hcode_theme_setting' );
 
-$layout_settings        = (isset($hcode_options['hcode_general_settings'])) ? $hcode_options['hcode_general_settings'] : '';
+$layout_settings = (isset($hcode_options['hcode_general_settings'])) ? $hcode_options['hcode_general_settings'] : '';
 $enable_container_fluid = (isset($hcode_options['hcode_general_enable_container_fluid'])) ? $hcode_options['hcode_general_enable_container_fluid'] : '';
 switch ($layout_settings) {
     case 'hcode_general_full_screen':
@@ -41,21 +41,21 @@ switch ($layout_settings) {
 
 // Check menu type for page
 $hcode_header_menu_type = (isset($hcode_options['hcode_header_layout_general'])) ? $hcode_options['hcode_header_layout_general'] : '';
-$hcode_layout_settings  = (isset($hcode_options['hcode_general_layout_settings'])) ? $hcode_options['hcode_general_layout_settings'] : '';
+$hcode_layout_settings = (isset($hcode_options['hcode_general_layout_settings'])) ? $hcode_options['hcode_general_layout_settings'] : '';
 ?>
 <?php
 $title = '';
 if (class_exists('breadcrumb_navigation_xt'))
-	{
-	    $hcode_breadcrumb                                         = new breadcrumb_navigation_xt;
-	    $hcode_breadcrumb->opt['static_frontpage']                = false;
-	    $hcode_breadcrumb->opt['url_blog']                        = '';
-	    $hcode_breadcrumb->opt['title_blog']                      = 'Home';
-	    $hcode_breadcrumb->opt['title_home']                      = 'Home';
-	    $hcode_breadcrumb->opt['separator']                       = '';
-	    $hcode_breadcrumb->opt['tag_page_prefix']                 = '';
-	    $hcode_breadcrumb->opt['singleblogpost_category_display'] = false;
-	}
+{
+    $hcode_breadcrumb = new breadcrumb_navigation_xt;
+    $hcode_breadcrumb->opt['static_frontpage'] = false;
+    $hcode_breadcrumb->opt['url_blog'] = '';
+    $hcode_breadcrumb->opt['title_blog'] = __('Home','H-Code');
+    $hcode_breadcrumb->opt['title_home'] = __('Home','H-Code');
+    $hcode_breadcrumb->opt['separator'] = '';
+    $hcode_breadcrumb->opt['tag_page_prefix'] = '';
+    $hcode_breadcrumb->opt['singleblogpost_category_display'] = false;
+}
 if(is_search()):
     $title .= __('Search For ','H-Code').'"'.get_search_query().'"';
 elseif(is_author()):
@@ -74,9 +74,9 @@ else:
     $title .= single_cat_title( '', false );
 endif;
 
-    $top_header_class    = '';
+    $top_header_class = '';
 
-    $hcode_options       = get_option( 'hcode_theme_setting' );
+    $hcode_options = get_option( 'hcode_theme_setting' );
     $hcode_enable_header = (isset($hcode_options['hcode_enable_header_general'])) ? $hcode_options['hcode_enable_header_general'] : '';
     $hcode_header_layout = (isset($hcode_options['hcode_header_layout_general'])) ? $hcode_options['hcode_header_layout_general'] : '';
 

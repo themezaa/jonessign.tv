@@ -19,7 +19,7 @@
       <param type="onoff" label="Full width" name="widget-bar-full-width"/>
       <param type="onoff" label="Overlay" name="widget-bar-overlay" class="n2-expert"/></param>
     <param type="text" label="Separator" name="widget-bar-separator"/>
-    <param name="widget-bar-align" type="radio" label="Align" class="n2-expert">
+    <param name="widget-bar-align" type="radio" label="Align">
       <option value="left">Left</option>
       <option value="center">Center</option>
       <option value="right">Right</option>

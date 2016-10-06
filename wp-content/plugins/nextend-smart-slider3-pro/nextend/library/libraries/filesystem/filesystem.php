@@ -132,7 +132,7 @@ abstract class N2FilesystemAbstract {
      */
     public static function pathToRelativePath($path) {
         $i = N2Filesystem::getInstance();
-        return str_replace($i->_basepath, '', str_replace('/', DIRECTORY_SEPARATOR, $path));
+        return preg_replace('/^'.preg_quote($i->_basepath, '/').'/', '', str_replace('/', DIRECTORY_SEPARATOR, $path));
     }
 
     /**

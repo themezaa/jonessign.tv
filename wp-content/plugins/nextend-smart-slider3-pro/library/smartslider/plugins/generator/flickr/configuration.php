@@ -33,8 +33,10 @@ class N2SliderGeneratorFlickrConfiguration
         require_once(dirname(__FILE__) . "/api/phpFlickr.php");
         $api_key    = $this->configuration->get('api_key');
         $api_secret = $this->configuration->get('api_secret');
-
-        return new phpFlickr($api_key, $api_secret);
+        
+        $api = new phpFlickr($api_key, $api_secret);
+        $api->setToken($this->configuration->get('token'));
+        return $api;
     }
 
     public function getData() {

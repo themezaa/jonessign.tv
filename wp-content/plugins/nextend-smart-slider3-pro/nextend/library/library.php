@@ -22,6 +22,7 @@ require_once N2LIBRARY . NDS . 'loader.php';
 N2Loader::import("platform", "platform");
 N2Loader::import("nextend");
 N2Loader::import("libraries.filesystem.filesystem");
+N2Loader::import('libraries.string');
 
 N2Loader::import("libraries.mvc.base");
 N2Loader::import('libraries.session.session');

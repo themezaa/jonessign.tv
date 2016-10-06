@@ -184,7 +184,7 @@ class N2LinkScrollTo {
                     $onclick = 'n2Scroll.element("' . $argument . '");';
                     break;
             }
-            $attributes['onclick'] = N2Html::encode($onclick . "return false;");
+            $attributes['onclick'] = $onclick . "return false;";
         }
         return '#';
     }

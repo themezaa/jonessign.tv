@@ -1,7 +1,6 @@
 <?php
 
-class N2SmartSliderSlides
-{
+class N2SmartSliderSlides {
 
     /**
      * @var N2SmartSlider
@@ -20,6 +19,7 @@ class N2SmartSliderSlides
 
     private $randomize = false;
     private $randomizeFirst = false;
+    private $randomizeCache = false;
     protected $maximumSlideCount = 100;
 
     public function __construct($slider) {
@@ -28,6 +28,7 @@ class N2SmartSliderSlides
         $params                  = $slider->params;
         $this->randomize         = intval($params->get('randomize', 0));
         $this->randomizeFirst    = intval($params->get('randomizeFirst', 0));
+        $this->randomizeCache    = intval($params->get('randomize-cache', 0));
         $this->maximumSlideCount = intval($params->get('maximumslidecount', '100'));
     }
 
@@ -79,7 +80,7 @@ class N2SmartSliderSlides
                 $staticSlidesCount++;
             }
         }
-        
+
         $countSlides = count($slides);
 
         for ($i = 0; $i < count($slides) && $countSlides > $staticSlidesCount; $i++) {
@@ -90,14 +91,14 @@ class N2SmartSliderSlides
             }
         }
 
-        if ($this->randomize) {
+        if (!$this->randomizeCache && $this->randomize) {
             shuffle($slides);
         }
         if ($this->maximumSlideCount > 0) {
             array_splice($slides, $this->maximumSlideCount);
         }
 
-        if ($this->randomizeFirst) {
+        if (!$this->randomizeCache && $this->randomizeFirst) {
             $this->slider->_activeSlide = mt_rand(0, count($slides) - 1);
         } else {
             for ($i = 0; $i < count($slides); $i++) {

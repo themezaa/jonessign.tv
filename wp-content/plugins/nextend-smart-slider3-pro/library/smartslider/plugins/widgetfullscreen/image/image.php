@@ -128,10 +128,12 @@ class N2SSPluginWidgetFullScreenImage extends N2SSPluginWidgetAbstract {
                     'style' => $style
                 ), N2Html::image($toNormal, 'Full screen', array(
                     'class'        => 'n2-full-screen-widget-to-normal n2-ow',
-                    'data-no-lazy' => '1'
+                    'data-no-lazy' => '1',
+                    'data-hack' => 'data-lazy-src'
                 )) . N2Html::image($toFull, 'Exit full screen', array(
                     'class'        => 'n2-full-screen-widget-to-full n2-ow',
-                    'data-no-lazy' => '1'
+                    'data-no-lazy' => '1',
+                    'data-hack' => 'data-lazy-src'
                 )));
         }
 

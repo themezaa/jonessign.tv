@@ -12,8 +12,7 @@ $day                          = get_the_date('d', get_the_ID());
 $month                        = get_the_date('F', get_the_ID());
 $year                         = get_the_date('Y', get_the_ID());
 
-// THE FOLLOWING ARE FROM THE ADVANCED CUSTOM FIELDS ASSIGNED TO THE JOB CONTENT TYPE
-$description                  = get_field( 'job_description' );
+// FROM ADVANCED CUSTOM FIELDS : Job $description                  = get_field( 'job_description' );
 $reports_to                   = get_field( 'job_org_structure' );
 $overlay                      = 'background: linear-gradient(rgba(40,80,120,0.9), rgba(40,80,120,0.9) )'; // this overlay is black, comment it out if you'd prefer the blue overlay on your header
 $overlay                      = 'background: linear-gradient(rgba(0,0,10,0.9), rgba(0,0,10,0.9) )'; // this overlay is black, comment it out if you'd prefer the blue overlay on your header
@@ -38,6 +37,47 @@ $year                = get_the_date('Y', get_the_ID());
 $the_query = new WP_Query( $args ); // query -- be sure to reset if you make other queries
                                     //
 ?>
+
+<!-- an initial attempt at tabs according to location -->
+
+<div class="container">
+    <div class="row">
+         <!-- Nav tabs -->
+        <ul class="nav nav-tabs nav-justified" role="tablist">
+            <li role="presentation"><a href="#grb" aria-controls="grb" role="tab" data-toggle="tab" title="jobs at the Green Bay location">Green Bay</a></li>
+            <li role="presentation"><a href="#phl" aria-controls="phl" role="tab" data-toggle="tab" title="jobs at the Philadelphia location">Philadelphia</a></li>
+            <li role="presentation"><a href="#san" aria-controls="san" role="tab" data-toggle="tab" title="jobs at the San Diego location">San Diego</a></li>
+            <li role="presentation"><a href="#lax" aria-controls="lax" role="tab" data-toggle="tab" title="jobs at the Los Angeles location">Los Angeles</a></li>
+            <li role="presentation"><a href="#las" aria-controls="las" role="tab" data-toggle="tab" title="jobs at the Las Vegas location">Las Vegas</a></li>
+            <li role="presentation"><a href="#ric" aria-controls="ric" role="tab" data-toggle="tab" title="jobs at the Virginia location">Virginia</a></li>
+            <li role="presentation"><a href="#rno" aria-controls="rno" role="tab" data-toggle="tab" title="jobs at the Reno location">Reno</a></li>
+            <li role="presentation"><a href="#sat" aria-controls="sat" role="tab" data-toggle="tab" title="jobs at the San Antonio location">San Antonio</a></li>
+            <li role="presentation"><a href="#ord" aria-controls="ord" role="tab" data-toggle="tab" title="jobs at the Chicago location">Chicago</a></li>
+            <li role="presentation"><a href="#tmp" aria-controls="tmp" role="tab" data-toggle="tab" title="jobs at the Tampa location">Tampa</a></li>
+            <li role="presentation"><a href="#mxz" aria-controls="mxz" role="tab" data-toggle="tab" title="jobs at the Juárez location">Juárez</a></li>
+            <li role="presentation"><a href="#mxt" aria-controls="mxt" role="tab" data-toggle="tab" title="jobs at the Tijuana location">Tijuana</a></li>
+        </ul>
+         <!-- END OF Nav tabs -->
+    </div><!-- end div.row -->
+
+    <!-- here I will attempt to get the tab content based on  the locations that are assigned to the job-->
+    <div class="row">
+        <?php
+        // use acf field from job custom fields
+        $job_locations =  get_field('job_locations');
+        // check to see if more than one location is specified for the job
+        if( $job_locations ){
+            $job_location_tag = implode( ' ', $job_locations);
+        }
+         ?>
+    </div><!-- end div.row -->
+</div> <!-- end div.container -->
+
+<!-- end of attempt at tabs based onposition -->
+
+
+
+
 <!-- div that establishes the flexible box model-->
 <div id="positions-list" class="flex row-wrap justify-start align-items-center align-content-center">
 <?php
@@ -50,26 +90,26 @@ if( have_posts() ):
 //    $post_type = get_post_type( get_the_ID() );
     $post_type = 'position';
     //echo '<div class="blog-listing blog-listing-classic">';
-               /* Image Alt, Title, Caption */
-                $img_alt     = hcode_option_image_alt(get_post_thumbnail_id());
-                $img_title   = hcode_option_image_title(get_post_thumbnail_id());
-                $image_alt   = ( isset($img_alt['alt']) ) ? $img_alt['alt'] : '' ;
-                $image_title = ( isset($img_title['title']) ) ? $img_title['title'] : '';
+   /* Image Alt, Title, Caption */
+    $img_alt     = hcode_option_image_alt(get_post_thumbnail_id());
+    $img_title   = hcode_option_image_title(get_post_thumbnail_id());
+    $image_alt   = ( isset($img_alt['alt']) ) ? $img_alt['alt'] : '' ;
+    $image_title = ( isset($img_title['title']) ) ? $img_title['title'] : '';
 
-                $img_attr = array(
-                    'title' => $image_title,
-                    'alt'   => $image_alt,
-                );
-                $thumb = wp_get_attachment_image_src( get_post_thumbnail_id(get_the_ID()), 'full' );
-               	$url = $thumb['0'];
-                if ( has_post_thumbnail() ) {
-                    $featured_image_url = wp_get_attachment_url( get_post_thumbnail_id() );
-                }
-                else {
-                    $featured_image_url =  HCODE_THEME_ASSETS_URI . '/images/no-image.png';
-                }
-                $position_link = get_permalink();
-                $position_title = get_the_title();
+    $img_attr = array(
+        'title' => $image_title,
+        'alt'   => $image_alt,
+    );
+    $thumb = wp_get_attachment_image_src( get_post_thumbnail_id(get_the_ID()), 'full' );
+   	$url = $thumb['0'];
+    if ( has_post_thumbnail() ) {
+        $featured_image_url = wp_get_attachment_url( get_post_thumbnail_id() );
+    }
+    else {
+        $featured_image_url =  HCODE_THEME_ASSETS_URI . '/images/no-image.png';
+    }
+    $position_link = get_permalink();
+    $position_title = get_the_title();
 ?>
 
     	<div id="positions-information" style="<?php echo $overlay; ?>,url('<?php echo $featured_image_url; ?>');background-size:cover;background-position: center top;" >

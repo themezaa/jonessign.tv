@@ -3,8 +3,7 @@
 /**
  * Class N2Html
  */
-class N2Html
-{
+class N2Html {
 
     public static $closeSingleTags = true;
     /**
@@ -99,7 +98,7 @@ class N2Html
      *
      * @return string the rendering result
      */
-    public static function renderAttributes($htmlOptions) {
+    public static function renderAttributes($htmlOptions = array()) {
         static $specialAttributes = array(
             'async'         => 1,
             'autofocus'     => 1,
@@ -158,10 +157,10 @@ class N2Html
             throw new Exception();
         }
         $htmlOptions["href"]   = $url;
-        $htmlOptions["encode"] = false;
+        //$htmlOptions["encode"] = false;
 
         $url = self::openTag("a", $htmlOptions);
-        if ($htmlOptions["encode"]) {
+        if (isset($htmlOptions["encode"]) && $htmlOptions["encode"]) {
             $url .= self::encode($name);
         } else {
             $url .= $name;
@@ -208,9 +207,9 @@ class N2Html
     public static function script($script, $file = false) {
         if ($file) {
             return N2Html::tag('script', array(
-                'type' => 'text/javascript',
-                'src'  => $script
-            ), '');
+                    'type' => 'text/javascript',
+                    'src'  => $script
+                ) + self::getScriptAttributes(), '');
         }
         return self::tag('script', array(
             'type'   => 'text/javascript',
@@ -233,6 +232,35 @@ class N2Html
 
     public static function clear() {
         return self::tag("div", array("class" => "clear"), "");
+    }
+
+    private static function getScriptAttributes() {
+        static $attributes = null;
+        if ($attributes === null) {
+            if (class_exists('N2Settings', false)) {
+                $value       = trim(html_entity_decode(strip_tags(N2Settings::get('scriptattributes', ''))));
+                $_attributes = explode(' ', str_replace('\'', "", str_replace("\"", "", $value)));
+                if (!empty($value) && !empty($_attributes)) {
+                    foreach ($_attributes AS $attr) {
+                        if (strpos($attr, '=') !== false) {
+                            $atts = explode("=", $attr);
+                            if(count($atts) <= 2){
+                                $attributes[$atts[0]] = $atts[1];
+                            } else {
+                                $attributes[$attr] = $attr;
+                            }
+                        } else {
+                            $attributes[$attr] = $attr;
+                        }
+                    }
+                } else {
+                    $attributes = array();
+                }
+            } else {
+                return array();
+            }
+        }
+        return $attributes;
     }
 
 }

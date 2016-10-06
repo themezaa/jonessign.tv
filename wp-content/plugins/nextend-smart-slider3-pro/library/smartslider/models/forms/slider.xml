@@ -291,6 +291,7 @@
         <param type="group" label="Randomize">
           <param name="randomize" type="onoff" label="Randomize" default="0"/>
           <param name="randomizeFirst" type="onoff" label="Randomize first" default="0"/>
+          <param name="randomize-cache" type="onoff" label="Cache support" default="0"/>
           <param name="variations" type="number" label="Variations" default="5" style="width:40px;"/></param>
         <param type="number" name="maximumslidecount" label="Maximum slide count" default="1000" style="width:40px;"/>
       </params>

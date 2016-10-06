@@ -124,7 +124,7 @@ class N2FormAbstract extends N2Data
 
     public static function importTab($type) {
         $class = 'N2Tab' . $type;
-        if (!class_exists($class)) {
+        if (!class_exists($class, false)) {
             for ($i = count(N2Form::$importPaths) - 1; $i >= 0; $i--) {
                 if (N2Loader::importPath(N2Form::$importPaths[$i] . '/tabs/' . $type)) {
                     break;

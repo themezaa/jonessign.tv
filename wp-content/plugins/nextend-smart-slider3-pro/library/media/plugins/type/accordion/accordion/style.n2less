@@ -57,6 +57,7 @@
   &.n2-accordion-horizontal .n2-accordion-title-inner {
     margin: 3px;
     overflow: hidden;
+    direction: ltr;
 
     .n2-accordion-title-rotate-90 {
       margin-top: @orientationmargin;

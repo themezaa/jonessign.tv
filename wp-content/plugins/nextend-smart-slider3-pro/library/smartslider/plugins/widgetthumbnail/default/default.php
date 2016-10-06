@@ -128,7 +128,14 @@ class N2SSPluginWidgetThumbnailDefault extends N2SSPluginWidgetAbstract {
         if ($orientation == 'auto') {
             $orientation = 'vertical';
         }
-        $slides = N2Html::openTag('table', array('class' => 'n2-ow'));
+        
+        if($params->get('widget-thumbnail-center',0)){
+            $tablestyle = 'margin:0 auto;';
+        } else {                   
+            $tablestyle = '';
+        }
+        
+        $slides = N2Html::openTag('table', array('class' => 'n2-ow','style' => $tablestyle));
 
         $containerStyle    = '';
         $captionClass      = 'n2-caption-' . $captionPlacement;

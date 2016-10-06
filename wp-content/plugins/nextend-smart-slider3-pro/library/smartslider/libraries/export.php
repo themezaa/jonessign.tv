@@ -85,6 +85,7 @@ class N2SmartSliderExport {
                 $slide['params'] = new N2Data($slide['params'], true);
 
                 self::addImage($slide['params']->get('backgroundImage'));
+                self::addImage($slide['params']->get('ligthboxImage'));
                 self::addLightbox($slide['params']->get('link'));
 
 
@@ -136,7 +137,7 @@ class N2SmartSliderExport {
             $zip->addFile(serialize($this->backup), 'data');
             if (!$saveAsFile) {
                 ob_end_clean();
-                header('Content-disposition: attachment; filename=' . preg_replace('/[^a-zA-Z0-9_-]/', '', $this->backup->slider['title']) . '.ss3');
+                header('Content-disposition: attachment; filename*=UTF-8\'\'' . rawurlencode($this->backup->slider['title'] . '.ss3'));
                 header('Content-type: application/zip');
                 echo $zip->file();
                 n2_exit(true);
@@ -264,8 +265,8 @@ class N2SmartSliderExport {
         foreach ($this->files AS $path => $content) {
             $zip->addFile($content, $path);
         }
-        ob_end_clean();
-        header('Content-disposition: attachment; filename=' . preg_replace('/[^a-zA-Z0-9_-]/', '', $slider['title']) . '.zip');
+        if (ob_get_length()) ob_end_clean();
+        header('Content-disposition: attachment; filename*=UTF-8\'\'' . rawurlencode($slider['title'] . '.zip'));
         header('Content-type: application/zip');
         echo $zip->file();
         n2_exit(true);

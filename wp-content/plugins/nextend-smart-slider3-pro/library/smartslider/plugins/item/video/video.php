@@ -12,6 +12,8 @@ class N2SSPluginItemVideo extends N2SSPluginItemAbstract {
 
     protected $priority = 20;
 
+    protected $group = 'Media';
+
     public function __construct() {
         $this->_title = n2_x('Video', 'Slide item');
     }
@@ -65,21 +67,21 @@ class N2SSPluginItemVideo extends N2SSPluginItemAbstract {
             $videoContent .= N2Html::tag("source", array(
                 "src"  => $slide->fill($data->get("video_mp4")),
                 "type" => "video/mp4"
-            ));
+            ), '', false);
         }
 
         if ($data->get("video_webm", false)) {
             $videoContent .= N2Html::tag("source", array(
                 "src"  => $slide->fill($data->get("video_webm")),
                 "type" => "video/webm"
-            ));
+            ), '', false);
         }
 
         if ($data->get("video_ogg", false)) {
             $videoContent .= N2Html::tag("source", array(
                 "src"  => $slide->fill($data->get("video_ogg")),
                 "type" => "video/ogg"
-            ));
+            ), '', false);
         }
 
         return $videoContent;

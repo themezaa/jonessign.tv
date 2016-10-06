@@ -8,6 +8,7 @@
       <option value="click">Click</option>
       <option value="mouseenter">Hover</option>
     </param>
+    <param name="widget-thumbnail-center" type="onoff" label="Center" class="n2-expert" default="0"/>
     <param type="group" label="Style">
       <param name="widget-thumbnail-style-bar" type="style" previewmode="simple" style2="sliderwidget-thumbnail-style-slides" label="Bar" set="1900">
         <![CDATA[ <div class="{styleClassName}" style="overflow: hidden; width:{$('#sliderwidget-thumbnail-width').val()*2.5}px;"><div style="width:200%"><div class="{styleClassName2}" style="display: inline-block; vertical-align:top; width:{$('#sliderwidget-thumbnail-width').val()}px; height: {$('#sliderwidget-thumbnail-height').val()}px; background: url('$system$/images/placeholder/imageback.png');"></div><div class="{styleClassName2} n2-active" style="display: inline-block; vertical-align:top; width:{$('#sliderwidget-thumbnail-width').val()}px; height: {$('#sliderwidget-thumbnail-height').val()}px; background: url('$system$/images/placeholder/image.png');"></div><div class="{styleClassName2}" style="display: inline-block; vertical-align:top; width:{$('#sliderwidget-thumbnail-width').val()}px; height: {$('#sliderwidget-thumbnail-height').val()}px; background: url('$system$/images/placeholder/imagefront.png');"></div></div></div> ]]>

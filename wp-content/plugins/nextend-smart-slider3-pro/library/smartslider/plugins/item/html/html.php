@@ -1,8 +1,7 @@
 <?php
 N2Loader::import('libraries.plugins.N2SliderItemAbstract', 'smartslider');
 
-class N2SSPluginItemHTML extends N2SSPluginItemAbstract
-{
+class N2SSPluginItemHTML extends N2SSPluginItemAbstract {
 
     var $_identifier = 'html';
 
@@ -38,16 +37,20 @@ class N2SSPluginItemHTML extends N2SSPluginItemAbstract
         if ($cssCode = $data->get('css', '')) {
             $css = N2Html::style($cssCode);
         }
-
-        return N2Html::tag("div", array(), $this->closeTags($slide->fill($data->get("html")) . $css));
+        return N2Html::tag("div", array(), $this->closeTags($slide->fill($data->get("html"))) . $css);
     }
 
     function closeTags($html) {
+
         if (class_exists('tidy', false)) {
             $tidy_config = array(
-                'output-xhtml'   => true,
-                'show-body-only' => true,
-                'wrap'           => 0
+                'input-xml'  => true,
+                'output-xml' => true,
+                'show-body-only'      => true,
+                'wrap'                => 0,
+                'new-blocklevel-tags' => 'menu,mytag,article,header,footer,section,nav,svg,path,g,a',
+                'new-inline-tags'     => 'video,audio,canvas,ruby,rt,rp',
+                'doctype'             => '<!DOCTYPE HTML>',
             );
             $tidy        = new tidy();
             return $tidy->repairString($html, $tidy_config, 'UTF8');
@@ -86,7 +89,7 @@ class N2SSPluginItemHTML extends N2SSPluginItemAbstract
 </tbody></table>',
             'css'  => 'table.my-table{
 width: 100%;
-background: #1890d7;
+background: #0c92df;
 color: white;
 }
 

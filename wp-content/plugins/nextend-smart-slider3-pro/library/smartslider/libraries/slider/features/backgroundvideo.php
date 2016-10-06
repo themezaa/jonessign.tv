@@ -29,21 +29,21 @@ class N2SmartSliderFeatureBackgroundVideo
             $sources .= N2Html::tag("source", array(
                 "src"  => $mp4,
                 "type" => "video/mp4"
-            ));
+            ), '', false);
         }
 
         if ($webm) {
             $sources .= N2Html::tag("source", array(
                 "src"  => $webm,
                 "type" => "video/webm"
-            ));
+            ), '', false);
         }
 
         if ($ogg) {
             $sources .= N2Html::tag("source", array(
                 "src"  => $ogg,
                 "type" => "video/ogg"
-            ));
+            ), '', false);
         }
 
         $attributes = array();

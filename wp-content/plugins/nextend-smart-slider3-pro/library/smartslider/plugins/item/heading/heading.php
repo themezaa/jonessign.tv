@@ -2,8 +2,7 @@
 
 N2Loader::import('libraries.plugins.N2SliderItemAbstract', 'smartslider');
 
-class N2SSPluginItemHeading extends N2SSPluginItemAbstract
-{
+class N2SSPluginItemHeading extends N2SSPluginItemAbstract {
 
     var $_identifier = 'heading';
 
@@ -55,7 +54,7 @@ class N2SSPluginItemHeading extends N2SSPluginItemAbstract
 
     function getTemplate($slider) {
 
-        return "<div><h{priority} id='{uid}' class='{fontclass} {styleclass} {class} n2-ow' style='display: {display}; {extrastyle};'><a href='#' class='{afontclass}' onclick='return false;'>{heading}</a></h{priority}>" . N2Html::scriptTemplate($this->getJs($slider->elementId, "{uid}")) . "</div>";
+        return "<div><h{priority} id='{uid}' class='{fontclass} {styleclass} {class} n2-ow' style='display: {display}; {extrastyle};'><a style='display: {display};' href='#' class='{afontclass}' onclick='return false;'>{heading}</a></h{priority}>" . N2Html::scriptTemplate($this->getJs($slider->elementId, "{uid}")) . "</div>";
     }
 
     function getJs($sliderId, $id) {
@@ -125,6 +124,7 @@ class N2SSPluginItemHeading extends N2SSPluginItemAbstract
         } else {
             $linkAttributes['class'] = ' n2-ow';
         }
+        $linkAttributes['style'] = "display:" . ($data->get('fullwidth', 1) ? 'block' : 'inline-block') . ";";
 
         return $this->heading($data->get('priority', 2), $attributes + array(
                 "id"    => $id,
@@ -141,25 +141,25 @@ class N2SSPluginItemHeading extends N2SSPluginItemAbstract
         self::initDefaultFont();
         self::initDefaultStyle();
         return array(
-            'priority'                       => '2',
-            'fullwidth'                      => 1,
-            'nowrap'                         => 1,
-            'heading'                        => n2_('Heading layer'),
-            'title'                          => '',
-            'link'                           => '#|*|_self',
-            'font'                           => self::$font,
-            'style'                          => self::$style,
+            'priority'  => '2',
+            'fullwidth' => 1,
+            'nowrap'    => 1,
+            'heading'   => n2_('Heading layer'),
+            'title'     => '',
+            'link'      => '#|*|_self',
+            'font'      => self::$font,
+            'style'     => self::$style,
 
             'split-text-transform-origin'    => '50|*|50|*|0',
             'split-text-backface-visibility' => 1,
 
-            'split-text-animation-in'        => '',
-            'split-text-delay-in'            => 0,
+            'split-text-animation-in' => '',
+            'split-text-delay-in'     => 0,
 
-            'split-text-animation-out'       => '',
-            'split-text-delay-out'           => 0,
+            'split-text-animation-out' => '',
+            'split-text-delay-out'     => 0,
 
-            'class'                          => ''
+            'class' => ''
         );
     }
 

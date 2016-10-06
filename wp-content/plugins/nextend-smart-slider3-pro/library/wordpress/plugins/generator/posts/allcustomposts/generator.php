@@ -65,7 +65,15 @@ class N2GeneratorPostsAllCustomPosts extends N2GeneratorAbstract
             }
 
             $record['featured_image'] = wp_get_attachment_url(get_post_thumbnail_id($post->ID));
-            if (!$record['featured_image']) $record['featured_image'] = '';
+            if (!$record['featured_image']) {
+                $record['featured_image'] = '';
+            } else {
+                $thumbnail_meta = get_post_meta($thumbnail_id, '_wp_attachment_metadata', true);
+                if (isset($thumbnail_meta['sizes'])) {
+                    $sizes = $this->getImageSizes($thumbnail_id, $thumbnail_meta['sizes']);
+                    $record = array_merge($record, $sizes);
+                }
+            }
 
             $record['thumbnail'] = $record['image'] = $record['featured_image'];
             $record['url_label'] = 'View';
@@ -92,14 +100,32 @@ class N2GeneratorPostsAllCustomPosts extends N2GeneratorAbstract
                 $fields = get_fields($post->ID);
                 if (count($fields) && is_array($fields) && !empty($fields)) {
                     foreach ($fields AS $k => $v) {
-                        $k = str_replace('-', '', $k);
-                        while(isset($record[$k])){
-                            $k = 'acf_' . $k;
+                        $type   = $this->getACFType($k,$post->ID);
+                        $k      = str_replace('-', '', $k);
+
+                        while (isset($record[$k])) {
+                            $k  = 'acf_' . $k;
                         };
+
+
                         if (!is_array($v) && !is_object($v)) {
+                            if($type['type'] == "image" && is_numeric($type["value"])){
+                                $thumbnail_meta = wp_get_attachment_metadata($type["value"]);
+                                $src = wp_get_attachment_image_src($v, $thumbnail_meta['file']);
+                                $v = $src[0];
+                            }
                             $record[$k] = $v;
                         } else if (!is_object($v) && isset($v['url'])) {
                             $record[$k] = $v['url'];
+                        }
+                        if($type['type'] == "image" && (is_numeric($type["value"]) || is_array($type['value']))){
+                            if(is_array($type['value'])){
+                                $sizes              = $this->getImageSizes($type["value"]["id"], $type["value"]["sizes"], $k);
+                            } else {
+                                $thumbnail_meta     = wp_get_attachment_metadata($type["value"]);
+                                $sizes              = $this->getImageSizes($type["value"], $thumbnail_meta['sizes'], $k);
+                            }
+                            $record = array_merge($record, $sizes);
                         }
                     }
                 }
@@ -116,5 +142,24 @@ class N2GeneratorPostsAllCustomPosts extends N2GeneratorAbstract
         if ($post) setup_postdata($post);
 
         return $data;
+    }
+
+    protected function getImageSizes($thumbnail_id, $sizes, $prefix = false) {
+        $data = array();
+        if(!$prefix){
+            $prefix = "";
+        } else {
+            $prefix = $prefix . "_";
+        }
+        foreach ($sizes AS $size => $image) {
+            $imageSrc               = wp_get_attachment_image_src($thumbnail_id, $size);
+            $data[$prefix.'image_' . $size] = $imageSrc[0];
+        }
+        return $data;
+    }
+
+    protected function getACFType($key, $post_id) {
+        $type = get_field_object($key, $post_id);
+        return $type;
     }
 }

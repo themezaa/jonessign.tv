@@ -79,7 +79,7 @@ class N2Image extends N2CacheImage {
                         break;
                 }
                 if (!$extension) {
-                    throw new Exception('Filtype of the image is not supported: #' . $imageType . ' code  ' . $imagePath);
+                    return $originalImageUrl;
                 }
                 return N2Filesystem::pathToAbsoluteURL($cache->makeCache($extension, array(
                     $cache,
@@ -231,7 +231,7 @@ class N2Image extends N2CacheImage {
                         break;
                 }
                 if (!$extension) {
-                    throw new Exception('Filtype of the image is not supported: #' . $imageType . ' code  ' . $imagePath);
+                    return $originalImageUrl;
                 }
                 return N2ImageHelper::dynamic(N2Filesystem::pathToAbsoluteURL($cache->makeCache($extension, array(
                     $cache,

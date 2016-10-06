@@ -96,20 +96,40 @@ class N2SmartSliderFeatures {
 
     public function generateJSProperties() {
 
-        $return = array(
+        $return         = array(
             'admin'          => $this->slider->isAdmin,
             'isStaticEdited' => intval($this->slider->isStaticEdited),
             'translate3d'    => intval(N2SmartSliderSettings::get('hardware-acceleration', 1)),
-            'randomize'      => intval(!$this->slider->isAdmin && $this->slider->params->get('randomize', 0)),
             'callbacks'      => $this->slider->params->get('callbacks', '')
         );
+        $randomizeCache = $this->slider->params->get('randomize-cache', 0);
+        if (!$this->slider->isAdmin && $randomizeCache) {
+            $return['randomize'] = array(
+                'randomize'      => intval($this->slider->params->get('randomize', 0)),
+                'randomizeFirst' => intval($this->slider->params->get('randomizeFirst', 0))
+            );
+        }
         if ($this->slider->params->get('global-lightbox', 0)) {
             $fail         = false;
             $images       = array();
+            $deviceImages = array();
             $titles       = array();
             $descriptions = array();
             for ($i = 0; $i < count($this->slider->slides); $i++) {
-                $image = N2ImageHelper::fixed($this->slider->slides[$i]->getBackgroundImage());
+                $backgroundImage = $this->slider->slides[$i]->getLightboxImage();
+                $image           = N2ImageHelper::fixed($backgroundImage);
+
+                $imageData = N2ImageManager::getImageData($backgroundImage);
+                foreach ($imageData AS $k => $data) {
+                    if (!empty($data['image'])) {
+                        if (!isset($deviceImages[$image])) {
+                            $deviceImages[$image] = array(
+                                'desktop' => $image
+                            );
+                        }
+                        $deviceImages[$image][$k] = N2ImageHelper::fixed($data['image']);
+                    }
+                }
                 if (!empty($image)) {
                     $images[]       = $image;
                     $titles[]       = $this->slider->slides[$i]->getTitle();
@@ -121,8 +141,9 @@ class N2SmartSliderFeatures {
             }
             if (!$fail) {
                 N2AssetsPredefined::loadLiteBox();
-                $return['lightbox'] = $images;
-                $label              = $this->slider->params->get('global-lightbox-label', 0);
+                $return['lightbox']             = $images;
+                $return['lightboxDeviceImages'] = $deviceImages;
+                $label                          = $this->slider->params->get('global-lightbox-label', 0);
                 if ($label == 'name' || $label == 'namemore') {
                     $return['titles'] = $titles;
                     if ($label == 'namemore') {

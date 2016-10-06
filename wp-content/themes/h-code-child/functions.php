@@ -135,50 +135,180 @@ function add_sign_type_form_fields() {
 }
 
 
-
-
-
-
-
-
-
 /**
  *
- * get taxonomy term links
- *developer.wordpress.org/reference/functions/get_the_terms/
- * @see get_object_taxonomies()
+ * To Apply Categories or tags to attachments
+ * https://code.tutsplus.com/articles/applying-categories-tags-and-custom-taxonomies-to-media-attachments--wp-32319
+ *
  */
-
-function jones_custom_taxonomies_terms_links() {
-	// get a given post by its ID set it as $post object
-	$post       = get_post( $post->ID );
-	// get post type by post
-	$post_type  = $post->post_type;
-	//get the post types taxonomies
-	$taxonomies = get_object_taxonomies( $post_type, 'location');
-	//establish $out as an array to add things to later
-	$out        = array();
-
-	// set up a classic foreach loop
-	foreach ($taxonomies as $taxonomy_slug => $taxonomy) {
-		//get terms related to the post
-		$terms = get_the_terms( $post->ID, $taxonomy_slug);
-		// what to do in the event there are some tags
-		$term_qty = count($terms);
-		$location = 'Location' . ($term_qty > 1 ? 's':'');
-		if ( ! empty( $terms ) ){
-			//let's push some things into the $out array
-			//$out[] = '<h2>' . $taxonomy->label . $term_qty . "</h2>\n<ul style=\"list-style-type:none;\">";
-			$out[] = '<h2>' . $location . ": </h2>\n<ul style=\"list-style-type:none;padding-left:0px;\">";
-			//$out[] = "<ul style=\"list-style-type:none;padding-left:0px;\">";
-			foreach ($terms as $term ) {
-				$out[] = sprintf( '<li><a href="%1$s">%2$s</a></li>',
-				esc_url( get_term_link( $term->slug, $taxonomy_slug ) ),
-				esc_html( $term->name )
-				);
-			}
-			$out[] = "\n</ul>\n";
-		}
-	}
-	return implode( '', $out );
+function jsco_add_tags_to_attachments() {
+	register_taxonomy_for_object_type( 'sign_type', 'attachment');
 }
+
+
+/*Smart Slider 3 refresh cache start*/
+
+//if(class_exists("N2Loader") && class_exists("N2Cache")){
+//    N2Loader::import("libraries.slider.abstract", "smartslider");
+//
+//    function refreshCache() {
+//        $sliderid = 12; //you need your slider ID
+//        N2Cache::clearGroup(N2SmartSliderAbstract::getCacheId($sliderid));
+//        N2Cache::clearGroup(N2SmartSliderAbstract::getAdminCacheId($sliderid));
+//    }
+//
+//    add_action( 'save_post', 'refreshCache', 10, 0 );
+//}
+/*Smart Slider 3 refresh cache end*/
+
+
+//GENERAL function that outputs a button to make what is on the page into a sweet pdf, provided what is on the page is a project profile.
+function get_this_as_pdf(){
+    ?>
+    <span class="pdf-button">
+        <a class="print-to-pdf" rel="nofollow" href="<?php get_permalink(); ?>pdf" title="save this as a PDF">
+            <img class="pdf-print-link" src="/wp-content/uploads/2016/09/Printer.svg" alt="print this page as a pdf" style="max-width:100px;" />
+        </a>
+    </span>
+    <?php
+}
+// end of function to get a project page as a PDF
+
+
+/*==========================================
+=            ADD ACF FIELDS to "SIGN" Taxonomy SEE: https://www.advancedcustomfields.com/resources/register-fields-via-php/            =
+==========================================*/
+function sign_type_tag_additional_fields() {
+    if( function_exists('acf_add_local_field_group') ):
+
+acf_add_local_field_group(array (
+    'key' => 'group_579f949c9f6a7',
+    'title' => 'Sign Type',
+    'fields' => array (
+        array (
+            'key' => 'field_57ed811edde80',
+            'label' => 'Sign Type Tag Additional Fields',
+            'name' => '',
+            'type' => 'tab',
+            'instructions' => '',
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array (
+                'width' => '100',
+                'class' => '',
+                'id' => '',
+            ),
+            'placement' => 'left',
+            'endpoint' => 0,
+        ),
+        array (
+            'key' => 'field_57ed823ee62dc',
+            'label' => 'Sign Type Tag Main Image',
+            'name' => 'sign_type_main_image',
+            'type' => 'image',
+            'instructions' => 'Should be at least 1280x720 and follow the 16x9 aspect',
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array (
+                'width' => '100',
+                'class' => '',
+                'id' => '',
+            ),
+            'return_format' => 'array',
+            'preview_size' => 'hcode-navigation-img',
+            'library' => 'all',
+            'min_width' => 960,
+            'min_height' => 540,
+            'min_size' => '',
+            'max_width' => '',
+            'max_height' => '',
+            'max_size' => '',
+            'mime_types' => '',
+        ),
+        array (
+            'key' => 'field_57ed80c7dde7f',
+            'label' => 'Use Cases',
+            'name' => 'sign_type_use_cases',
+            'type' => 'repeater',
+            'instructions' => 'What situations is this sign type used in?',
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array (
+                'width' => '100',
+                'class' => '',
+                'id' => '',
+            ),
+            'collapsed' => '',
+            'min' => '',
+            'max' => '',
+            'layout' => 'table',
+            'button_label' => 'Add Row',
+            'sub_fields' => array (
+                array (
+                    'key' => 'field_57f6879444d3c',
+                    'label' => 'Use Scenario',
+                    'name' => 'sign_type_use_case',
+                    'type' => 'text',
+                    'instructions' => 'Enter each use case as an additional item',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array (
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'default_value' => '',
+                    'placeholder' => 'Example: Pedestrian Traffic Heavy',
+                    'prepend' => '',
+                    'append' => '',
+                    'maxlength' => '',
+                ),
+            ),
+        ),
+        array (
+            'key' => 'field_57f69d34a0932',
+            'label' => 'Button Title',
+            'name' => 'sign_type_button_title',
+            'type' => 'text',
+            'instructions' => '',
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array (
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'default_value' => '',
+            'placeholder' => '',
+            'prepend' => '',
+            'append' => '',
+            'maxlength' => '',
+        ),
+    ),
+    'location' => array (
+        array (
+            array (
+                'param' => 'taxonomy',
+                'operator' => '==',
+                'value' => 'sign',
+            ),
+        ),
+    ),
+    'menu_order' => 1,
+    'position' => 'normal',
+    'style' => 'default',
+    'label_placement' => 'top',
+    'instruction_placement' => 'label',
+    'hide_on_screen' => '',
+    'active' => 1,
+    'description' => '',
+));
+
+endif;
+
+}
+
+add_action('acf/init', 'sign_type_tag_additional_fields' );
+/* end of ACF additional fields for taxonomy type of sign*/
+
+

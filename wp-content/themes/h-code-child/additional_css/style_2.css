@@ -19,13 +19,14 @@
 	2.3 Print to PDF Button Style
 3. Staffmember Styles
 	3.1 Single Staffmember
+4. 404 Page Styles
 */
 
 /*POSITION ARCHIVE PAGE TYPES*/
 
 /*1.1 GENERAL POSITION ARCHIVE PAGE STYLES*/
 	/*set minimum height requirement for each position box*/
-
+@import 'https://fonts.googleapis.com/css?family=Monoton';
 /*each position on the archive-position page is container inside div#positions-information*/
 #positions-information{
 	height: 400px;
@@ -202,6 +203,79 @@ h2#positions-title{
 
 /*=====  End of staffmember styles  ======*/
 
-/*div#print-content{
-	display:none;*/
+/.no-display{
+	display:none;
 }
+section#error-404{
+	background:black;
+}
+div#error-message{
+	margin-top: 200px;
+	min-height:600px;
+	min-width:100%;
+}
+#error-message span{
+	display:block;
+	text-transform: uppercase;
+	letter-spacing: 4px;
+	color:white;
+}
+
+div#error-message span:not(:last-of-type){
+	font-size: 2.8rem;
+	color:white;
+	line-height: 2.9rem;
+	font-family: Monoton;
+	color: red;
+	text-shadow: 0 0 80px red, 0 0 30px FireBrick, 0 0 6px DarkRed;
+}
+div#error-message span:first-of-type{
+	color:#fff;
+	  text-shadow: 0 0 80px #ffffff, 0 0 30px #008000, 0 0 6px #0000ff;
+	  padding-bottom: 0.5rem;
+}
+div#error-message span:last-of-type{
+	font-weight: 700;
+	padding-top:1.4rem;
+}
+
+
+/*==================================
+            4. 404 STYLES            =
+==================================*/
+
+section#error-404{
+	background:black;
+}
+div#error-message{
+	margin-top: 200px;
+	min-height:600px;
+	min-width:100%;
+}
+#error-message span{
+	display:block;
+	text-transform: uppercase;
+	letter-spacing: 4px;
+	color:white;
+}
+
+div#error-message span:not(:last-of-type){
+	font-size: 2.8rem;
+	color:white;
+	line-height: 2.9rem;
+	font-family: Monoton;
+	color: red;
+	text-shadow: 0 0 80px red, 0 0 30px FireBrick, 0 0 6px DarkRed;
+}
+div#error-message span:first-of-type{
+	color:#fff;
+	  text-shadow: 0 0 80px #ffffff, 0 0 30px #008000, 0 0 6px #0000ff;
+	  padding-bottom: 0.5rem;
+}
+div#error-message span:last-of-type{
+	font-weight: 700;
+	padding-top:1.4rem;
+}
+
+
+/*=====  End of 404 STYLES  ======*/

@@ -164,7 +164,8 @@ class N2GeneratorEventsManagerEvents extends N2GeneratorAbstract
             //post data
             $data[$i]['title']       = $post->post_title;
             $data[$i]['description'] = $post->post_content;
-            $data[$i]['image']       = N2ImageHelper::dynamic(wp_get_attachment_url(get_post_thumbnail_id($post->ID)));
+            $data[$i]['excerpt']     = $post->post_excerpt;
+            $data[$i]['image']       = N2ImageHelper::dynamic(wp_get_attachment_url(get_post_thumbnail_id($post->ID)));            
             $thumbnail               = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID, 'thumbnail'));
             if ($thumbnail[0]) {
                 $data[$i]['thumbnail'] = N2ImageHelper::dynamic($thumbnail[0]);

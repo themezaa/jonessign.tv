@@ -24,6 +24,15 @@
 .justify-center        {-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;}
 
 
+/*------- ALIGN IS NO DIFFERENT THAN ALIGN ITEMS, BUT YOU KEEP FORGETTING, SO MIGHT AS WELL GO WITH IT ----*/
+.align-space-around  {-webkit-align-items:space-around;-ms-flex-align:space-around;align-items:space-around;}
+.align-space-between {-webkit-align-items:space-between;-ms-flex-align:space-between;align-items:space-between;}
+.align-start         {-webkit-align-items:flex-start;-ms-flex-align:start;align-items:flex-start;}
+.align-end           {-webkit-align-items:flex-end;-ms-flex-align:end;align-items:flex-end;}
+.align-center        {-webkit-align-items:center;-ms-flex-align:center;align-items:center;}
+.align-stretch       {-webkit-align-items:stretch;-ms-flex-align:stretch;align-items:stretch;}
+.align-baseline      {-webkit-align-items:baseline;-ms-flex-align:baseline;align-items:baseline;}
+
 /*---  ALIGN ITEMS IS FOR SECONDARY AXIS  ----------*/
 .align-items-space-around  {-webkit-align-items:space-around;-ms-flex-align:space-around;align-items:space-around;}
 .align-items-space-between {-webkit-align-items:space-between;-ms-flex-align:space-between;align-items:space-between;}

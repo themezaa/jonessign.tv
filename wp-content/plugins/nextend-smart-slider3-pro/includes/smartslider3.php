@@ -138,7 +138,7 @@ class N2_SMARTSLIDER_3 {
     }
 
     public static function upgrade($upgrader_object, $options) {
-        if ($options['action'] == 'update' && $options['type'] == 'plugin') {
+        if (is_array($options['plugins']) && $options['action'] == 'update' && $options['type'] == 'plugin') {
             foreach ($options['plugins'] as $plugin) {
                 if ($plugin == NEXTEND_SMARTSLIDER_3_BASENAME) {
                     self::install(true);

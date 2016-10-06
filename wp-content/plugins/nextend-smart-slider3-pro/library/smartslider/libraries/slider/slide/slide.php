@@ -149,11 +149,11 @@ class N2SmartSliderSlide {
                 $this->containerAttributes['data-href'] = (N2Platform::$isJoomla ? JRoute::_($url, false) : $url);
                 if (empty($this->containerAttributes['onclick'])) {
                     if ($target == '_blank') {
-                        $this->containerAttributes['n2click'] = "window.open(this.getAttribute('data-href'),'_blank');";
+                        $this->containerAttributes['data-n2click'] = "window.open(this.getAttribute('data-href'),'_blank');";
                     } else {
-                        $this->containerAttributes['n2click'] = "window.location=this.getAttribute('data-href')";
+                        $this->containerAttributes['data-n2click'] = "window.location=this.getAttribute('data-href')";
                     }
-                    $this->containerAttributes['n2middleclick'] = "window.open(this.getAttribute('data-href'),'_blank');";
+                    $this->containerAttributes['data-n2middleclick'] = "window.open(this.getAttribute('data-href'),'_blank');";
                 }
             }
             $this->containerAttributes['style'] .= 'cursor:pointer;';
@@ -272,14 +272,14 @@ class N2SmartSliderSlide {
     }
 
     private function __splitbychars($s, $start, $length) {
-        return substr($s, $start, $length);
+        return N2String::substr($s, $start, $length);
     }
 
     private function __splitbywords($s, $start, $length) {
-        $len      = strlen($s);
-        $posStart = max(0, $start == 0 ? 0 : strpos($s, ' ', $start));
-        $posEnd   = max(0, $length > $len ? $len : strpos($s, ' ', $length));
-        return substr($s, $posStart, $posEnd);
+        $len      = N2String::strlen($s);
+        $posStart = max(0, $start == 0 ? 0 : N2String::strpos($s, ' ', $start));
+        $posEnd   = max(0, $length > $len ? $len : N2String::strpos($s, ' ', $length));
+        return N2String::substr($s, $posStart, $posEnd);
     }
 
     private function __findimage($s, $index) {
@@ -305,28 +305,10 @@ class N2SmartSliderSlide {
         }
         return $s;
     }
-
-    /*
-    public function fill($value) {
-        if (!empty($this->variables)) {
-            return preg_replace_callback('/{(.*?)(\/([0-9]+))?}/', array(
-                $this,
-                'replaceVariable'
-            ), $value);
-        }
-        return $value;
+    
+    private function __removevarlink($s) {
+        return preg_replace('/<a href=\"(.*?)\">(.*?)<\/a>/', '', $s);
     }
-
-    private function replaceVariable($match) {
-        if (!isset($match[3])) {
-            $match[3] = 1;
-        }
-        if ($this->variables[$match[3] - 1][$match[1]]) {
-            return $this->variables[$match[3] - 1][$match[1]];
-        }
-        return '';
-    }
-    */
 
     public function getTitle() {
         return $this->fill($this->title);
@@ -364,6 +346,14 @@ class N2SmartSliderSlide {
         }
 
         return '<img class="n2-ss-thumbnail-type n2-ow" src="' . N2ImageHelperAbstract::SVGToBase64('$ss$/images/thumbnail-types/' . $type . '.svg') . '"/>';
+    }
+
+    public function getLightboxImage() {
+        $image = $this->fill($this->parameters->get('ligthboxImage'));
+        if (empty($image)) {
+            return $this->getBackgroundImage();
+        }
+        return $image;
     }
 
     public function getRow() {

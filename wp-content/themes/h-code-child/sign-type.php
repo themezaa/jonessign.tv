@@ -1,6 +1,6 @@
 <?php
 /**
- * A single item of the "Sign" custom post type and a slider at the top option
+ * This represents the taxonomy tag "sign-type"
  *
  * @package H-Code-Child
  */

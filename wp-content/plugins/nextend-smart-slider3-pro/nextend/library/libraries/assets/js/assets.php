@@ -33,7 +33,7 @@ class N2AssetsJs extends N2AssetsAbstract {
                 }
             }
             $combinedFile = $jsCombined->make();
-            $scripts      = 'nextend.loadScript("' . N2Uri::pathToUri($combinedFile) . '?' . filemtime($combinedFile) . '");';
+            $scripts      = 'nextend.loadScript("' . N2Uri::pathToUri($combinedFile) . '");';
             $output .= N2Html::script(self::minify_js($scripts . "\n"));
         } else {
             if (!N2Platform::$isAdmin && N2Settings::get('combine-js', '0')) {
@@ -42,7 +42,7 @@ class N2AssetsJs extends N2AssetsAbstract {
                     $jsCombined->add($file);
                 }
                 $combinedFile = $jsCombined->make();
-                $output .= N2Html::script(N2Uri::pathToUri($combinedFile) . '?' . filemtime($combinedFile), true) . "\n";
+                $output .= N2Html::script(N2Uri::pathToUri($combinedFile), true) . "\n";
             } else {
                 foreach ($this->getFiles() AS $file) {
                     $output .= N2Html::script(N2Uri::pathToUri($file) . '?' . filemtime($file), true) . "\n";

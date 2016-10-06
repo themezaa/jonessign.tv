@@ -70,21 +70,21 @@ class N2SmartSliderTypeBlock extends N2SmartSliderType {
             $sources .= N2Html::tag("source", array(
                 "src"  => $mp4,
                 "type" => "video/mp4"
-            ));
+            ), '', false);
         }
 
         if ($webm) {
             $sources .= N2Html::tag("source", array(
                 "src"  => $webm,
                 "type" => "video/webm"
-            ));
+            ), '', false);
         }
 
         if ($ogg) {
             $sources .= N2Html::tag("source", array(
                 "src"  => $ogg,
                 "type" => "video/ogg"
-            ));
+            ), '', false);
         }
 
         $attributes = array(
@@ -99,10 +99,10 @@ class N2SmartSliderTypeBlock extends N2SmartSliderType {
             $attributes['loop'] = 'loop';
         }
 
-        return N2Html::tag('video', $attributes + array(
+        return N2Html::tag('div', array('class' => 'n2-ss-slider-background-video-container'), N2Html::tag('video', $attributes + array(
                 'class'     => 'n2-ss-slider-background-video',
                 'data-mode' => $params->get('backgroundVideoMode', 'fill')
-            ), $sources);
+            ), $sources));
 
     }
 
@@ -128,8 +128,8 @@ class N2SmartSliderTypeBlock extends N2SmartSliderType {
             'widgetshadow'            => 'disabled',
             'widgethtml'              => 'disabled',
             'randomize'               => 0,
-            'randomize'               => 0,
             'randomizeFirst'          => 0,
+            'randomize-cache'          => 0,
             'maximumslidecount'       => 1,
             'imageload'               => 0,
             'imageloadNeighborSlides' => 0,

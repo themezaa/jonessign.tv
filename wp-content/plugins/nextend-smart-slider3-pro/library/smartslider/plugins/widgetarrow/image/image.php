@@ -177,15 +177,18 @@ class N2SSPluginWidgetArrowImage extends N2SSPluginWidgetAbstract {
         if ($imageHover === null) {
             $image = N2Html::image($image, 'Arrow', array(
                 'class'        => 'n2-ow',
-                'data-no-lazy' => '1'
+                'data-no-lazy' => '1',
+                'data-hack' => 'data-lazy-src'
             ));
         } else {
             $image = N2Html::image($image, 'Arrow', array(
                     'class'        => 'n2-arrow-normal-img n2-ow',
-                    'data-no-lazy' => '1'
+                    'data-no-lazy' => '1',
+                    'data-hack' => 'data-lazy-src'
                 )) . N2Html::image($imageHover, 'Arrow', array(
                     'class'        => 'n2-arrow-hover-img n2-ow',
-                    'data-no-lazy' => '1'
+                    'data-no-lazy' => '1',
+                    'data-hack' => 'data-lazy-src'
                 ));
         }
 

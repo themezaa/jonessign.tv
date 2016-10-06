@@ -132,13 +132,13 @@ $headtitle = get_field('client_or_job');
 // end additional variables derived from advanced custom fields
 //
 // PRINT
- $printThis = '<span class="pdf-button"><a class="print-to-pdf" rel="nofollow" href="#" title="Print to PDF" onclick="window.print();return false;"> <img class="pdf-print-link" src="http://jonessign.tv/wp-content/uploads/2016/09/Printer.svg" alt="print this project profile to PDF" style="max-width: 100px;" /> </a></span>' ;
+
 ?>
 <!-- note: ALL SECTIONS MUST HAVE A DIV.CONTAINER AND A DIV.ROW TO NOT GET WONKY IF ONE IS USING BOOTSTRAP, WHICH WE ARE-->
 
 <!-- BEGIN PROJECT HEADER WITH IMAGE, CLIENT NAME, and OVERLAY -->
 <section class="no-padding hide-print"
-		style="<?php echo $overlay; ?>, url(<?php echo $header; ?>);background-size: cover;background-position: center center;">
+		style="<?php echo $overlay; ?>, url(<?php echo $header; ?>);background-size:100% 100%;background-position: center center;">
  <!-- BEGIN DIV CONTAINING CLIENT OR JOB NAME AS WELL AS A QUOTE ABOUT THE PROJECTIF AVAILABLE -->
 
 
@@ -199,7 +199,7 @@ $headtitle = get_field('client_or_job');
 
 			<dl id="project-aside-definition-list" class="aside">
 				<!-- PRINT TO PDF -->
-				<?php echo $printThis; ?>
+				<?php get_this_as_pdf(); ?>
 				<!-- PRINT TO PDF -->
 				<!-- client logo with link -->
 				<?php if( have_rows( 'proj_clients' ) ): ?>

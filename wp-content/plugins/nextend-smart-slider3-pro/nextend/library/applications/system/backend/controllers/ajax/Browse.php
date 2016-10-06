@@ -1,7 +1,6 @@
 <?php
 
-class N2SystemBackendBrowseControllerAjax extends N2BackendControllerAjax
-{
+class N2SystemBackendBrowseControllerAjax extends N2BackendControllerAjax {
 
     public function actionIndex() {
         $this->validateToken();
@@ -100,6 +99,7 @@ class N2SystemBackendBrowseControllerAjax extends N2BackendControllerAjax
                 if (strlen($fileName) == 0) {
                     $fileName = '';
                 }
+
                 $upload           = new N2BulletProof();
                 $file             = $upload->uploadDir($path)
                                            ->upload($_FILES['image'], $fileName);
@@ -139,13 +139,11 @@ class N2SystemBackendBrowseControllerAjax extends N2BackendControllerAjax
  * @link        https://github.com/samayo/BulletProof
  * @license     Luke 3:11 ( Free )
  */
-class N2ImageUploaderException extends Exception
-{
+class N2ImageUploaderException extends Exception {
 
 }
 
-class N2BulletProof
-{
+class N2BulletProof {
 
     /*
     |--------------------------------------------------------------------------
@@ -254,7 +252,6 @@ class N2BulletProof
 
         $listOfMimeTypes = array(
             1 => "gif",
-            "jpg",
             "jpeg",
             "png",
             "swf",
@@ -392,8 +389,7 @@ class N2BulletProof
         }
 
         //Check if size (in bytes) of the image are above or below of defined in 'limitSize()'
-        if ($fileToUpload["size"] < $this->imageSize["min"] || $fileToUpload["size"] > $this->imageSize["max"]
-        ) {
+        if ($fileToUpload["size"] < $this->imageSize["min"] || $fileToUpload["size"] > $this->imageSize["max"]) {
             throw new N2ImageUploaderException("File sizes must be between " . implode(" to ", $this->imageSize) . " bytes");
         }
 

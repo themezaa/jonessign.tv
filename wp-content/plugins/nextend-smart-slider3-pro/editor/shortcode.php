@@ -172,6 +172,15 @@ class N2SSShortcodeInsert {
                         show();
                     });
                 }
+
+                window.NextendSmartSliderDiviModal = function (button) {
+                    var $input = $(button).siblings('.regular-text');
+                    callback = function (id) {
+                        $input.val(id);
+                    };
+                    show();
+                    return false;
+                };
             });
         </script>
         <?php

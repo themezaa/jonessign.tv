@@ -1,7 +1,6 @@
 <?php
 
-class N2UriAbstract
-{
+class N2UriAbstract {
 
     var $_baseuri;
 
@@ -31,13 +30,19 @@ class N2UriAbstract
 
     static function pathToUri($path) {
         $i = N2Uri::getInstance();
-        return $i->_baseuri . str_replace(array(
-            N2Filesystem::getBasePath(),
-            DIRECTORY_SEPARATOR
-        ), array(
-            '',
-            '/'
-        ), str_replace('/', DIRECTORY_SEPARATOR, $path));
+
+        $from = array();
+        $to   = array();
+
+        $basePath = N2Filesystem::getBasePath();
+        if ($basePath != '/' && $basePath != "\\") {
+            $from[] = $basePath;
+            $to[]   = '';
+        }
+        $from[] = DIRECTORY_SEPARATOR;
+        $to[]   = '/';
+
+        return $i->_baseuri . str_replace($from, $to, str_replace('/', DIRECTORY_SEPARATOR, $path));
     }
 
     static function ajaxUri($query = '', $magento = 'nextendlibrary') {

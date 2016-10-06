@@ -38,6 +38,12 @@ div#n2-ss-3 .unselectable {
   -ms-user-select: none;
   user-select: none;
 }
+div#n2-ss-3.n2notransition * {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
 div#n2-ss-3 a {
   border: 0;
 }
@@ -136,11 +142,20 @@ div#n2-ss-3 .n2-ss-slide-background-video.n2-active {
   visibility: visible;
 }
 div#n2-ss-3 .n2-ss-layers-container {
+  visibility: hidden;
   position: relative;
   width: 100%;
   height: 100%;
+}
+div#n2-ss-3 [onclick].n2-ss-layers-container {
+  visibility: visible;
+}
+div#n2-ss-3 .n2-ss-layers-container {
   -webkit-perspective: 1000px;
   perspective: 1000px;
+}
+div#n2-ss-3 .n2-ss-layers-container > * {
+  visibility: visible;
 }
 div#n2-ss-3 .n2-ss-layer {
   position: absolute;
@@ -324,6 +339,16 @@ div#n2-ss-3 .n2-ss-thumbnail-type {
   left: 50%;
   top: 50%;
 }
+div#n2-ss-3 .n2-ss-icon-normal {
+  display: inline-block;
+}
+div#n2-ss-3 .n2-ss-icon-hover,
+div#n2-ss-3 .n2-ss-icon-has-hover:HOVER .n2-ss-icon-normal {
+  display: none;
+}
+div#n2-ss-3 .n2-ss-icon-has-hover:HOVER .n2-ss-icon-hover {
+  display: inline-block;
+}
 .clear {
   clear: both;
 }
@@ -343,10 +368,13 @@ div#n2-ss-3 .n2-ss-slider-1 {
   background-size: cover;
   background-attachment: scroll;
 }
-div#n2-ss-3 .n2-ss-slider-background-video {
+div#n2-ss-3 .n2-ss-slider-background-video-container {
   position: absolute;
   left: 0;
   top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 div#n2-ss-3 .n2-ss-slider-2 {
   position: relative;
@@ -373,11 +401,11 @@ div#n2-ss-3 .n2-ss-layers-container {
   height: 600px;
 }
 
-div#n2-ss-3 .n2-ss-layer .n2-font-2265e188c80eaac597f1bd3796ae3fd6-hover{font-family: 'Raleway','Arial';color: #ecbc00;font-size:225%;text-shadow: none;line-height: 1.5;font-weight: bold;font-style: normal;text-decoration: none;text-align: left;letter-spacing: normal;word-spacing: normal;text-transform: uppercase;}
-div#n2-ss-3 .n2-ss-layer .n2-font-2265e188c80eaac597f1bd3796ae3fd6-hover:HOVER, div#n2-ss-3 .n2-ss-layer .n2-font-2265e188c80eaac597f1bd3796ae3fd6-hover:ACTIVE, div#n2-ss-3 .n2-ss-layer .n2-font-2265e188c80eaac597f1bd3796ae3fd6-hover:FOCUS{}
+div#n2-ss-3 .n2-ss-layer .n2-font-59922ada561df148005f5b9fc67563b2-hover{font-family: 'Montserrat','Arial';color: #ffffff;font-size:225%;text-shadow: none;line-height: 1.5;font-weight: bold;font-style: normal;text-decoration: none;text-align: left;letter-spacing: normal;word-spacing: normal;text-transform: none;}
+div#n2-ss-3 .n2-ss-layer .n2-font-59922ada561df148005f5b9fc67563b2-hover:HOVER, div#n2-ss-3 .n2-ss-layer .n2-font-59922ada561df148005f5b9fc67563b2-hover:ACTIVE, div#n2-ss-3 .n2-ss-layer .n2-font-59922ada561df148005f5b9fc67563b2-hover:FOCUS{}
 
-div#n2-ss-3 .n2-style-bd66d0fb472ee5155d750fc1ac86ac96-heading{background: #ffffff;background: RGBA(255,255,255,0);padding:0.3em 0.8em 0.3em 0.8em ;box-shadow: none;border-width: 4px;border-style: solid;border-color: #ecbc00; border-color: RGBA(236,188,0,1);border-radius:0px;}
-div#n2-ss-3 .n2-style-bd66d0fb472ee5155d750fc1ac86ac96-heading:Hover, div#n2-ss-3 .n2-style-bd66d0fb472ee5155d750fc1ac86ac96-heading:ACTIVE, div#n2-ss-3 .n2-style-bd66d0fb472ee5155d750fc1ac86ac96-heading:FOCUS{}
+div#n2-ss-3 .n2-style-31350b47bda979b9ed0a2d383ba8c7e6-heading{background: #000000;background: RGBA(0,0,0,0);padding:5px 20px 5px 20px ;box-shadow: none;border-width: 0px;border-style: solid;border-color: #ffffff; border-color: RGBA(255,255,255,1);border-radius:0px;}
+div#n2-ss-3 .n2-style-31350b47bda979b9ed0a2d383ba8c7e6-heading:Hover, div#n2-ss-3 .n2-style-31350b47bda979b9ed0a2d383ba8c7e6-heading:ACTIVE, div#n2-ss-3 .n2-style-31350b47bda979b9ed0a2d383ba8c7e6-heading:FOCUS{}
 
 div#n2-ss-3 .n2-ss-layer .n2-font-b2430a454ef5ded891b5e54866648da3-hover{font-family: 'Quicksand','Arial';color: #ffffff;font-size:150%;text-shadow: none;line-height: 1.5;font-weight: normal;font-style: normal;text-decoration: none;text-align: center;letter-spacing: normal;word-spacing: normal;text-transform: none;}
 div#n2-ss-3 .n2-ss-layer .n2-font-b2430a454ef5ded891b5e54866648da3-hover:HOVER, div#n2-ss-3 .n2-ss-layer .n2-font-b2430a454ef5ded891b5e54866648da3-hover:ACTIVE, div#n2-ss-3 .n2-ss-layer .n2-font-b2430a454ef5ded891b5e54866648da3-hover:FOCUS{}
@@ -394,24 +422,30 @@ div#n2-ss-3 .n2-ss-layer .n2-font-fd7b2e330e761f21b182d6834003d42a-hover:HOVER, 
 div#n2-ss-3 .n2-ss-layer .n2-font-fd7b2e330e761f21b182d6834003d42a-hover{font-family: 'Quicksand','Arial';color: #ffffff;font-size:112.5%;text-shadow: none;line-height: 1.5;font-weight: bold;font-style: normal;text-decoration: none;text-align: left;letter-spacing: normal;word-spacing: normal;text-transform: none;}
 div#n2-ss-3 .n2-ss-layer .n2-font-fd7b2e330e761f21b182d6834003d42a-hover:HOVER, div#n2-ss-3 .n2-ss-layer .n2-font-fd7b2e330e761f21b182d6834003d42a-hover:ACTIVE, div#n2-ss-3 .n2-ss-layer .n2-font-fd7b2e330e761f21b182d6834003d42a-hover:FOCUS{}
 
-div#n2-ss-3 .n2-ss-layer .n2-font-b26c6ecdce996ba2cb0d0f8bf1361c6f-hover{font-family: 'Quicksand','Arial';color: #ecbc00;font-size:87.5%;text-shadow: none;line-height: 1.5;font-weight: bold;font-style: normal;text-decoration: none;text-align: left;letter-spacing: normal;word-spacing: normal;text-transform: none;}
-div#n2-ss-3 .n2-ss-layer .n2-font-b26c6ecdce996ba2cb0d0f8bf1361c6f-hover:HOVER, div#n2-ss-3 .n2-ss-layer .n2-font-b26c6ecdce996ba2cb0d0f8bf1361c6f-hover:ACTIVE, div#n2-ss-3 .n2-ss-layer .n2-font-b26c6ecdce996ba2cb0d0f8bf1361c6f-hover:FOCUS{}
+div#n2-ss-3 .n2-ss-layer .n2-font-65a1fdc9600f9bbb60a9dee50a19e48b-hover{font-family: 'Montserrat','Arial';color: #ffffff;font-size:87.5%;text-shadow: none;line-height: 1.5;font-weight: normal;font-style: normal;text-decoration: none;text-align: left;letter-spacing: normal;word-spacing: normal;text-transform: none;}
+div#n2-ss-3 .n2-ss-layer .n2-font-65a1fdc9600f9bbb60a9dee50a19e48b-hover:HOVER, div#n2-ss-3 .n2-ss-layer .n2-font-65a1fdc9600f9bbb60a9dee50a19e48b-hover:ACTIVE, div#n2-ss-3 .n2-ss-layer .n2-font-65a1fdc9600f9bbb60a9dee50a19e48b-hover:FOCUS{}
 
-div#n2-ss-3 .n2-ss-layer .n2-font-b26c6ecdce996ba2cb0d0f8bf1361c6f-hover{font-family: 'Quicksand','Arial';color: #ecbc00;font-size:87.5%;text-shadow: none;line-height: 1.5;font-weight: bold;font-style: normal;text-decoration: none;text-align: left;letter-spacing: normal;word-spacing: normal;text-transform: none;}
-div#n2-ss-3 .n2-ss-layer .n2-font-b26c6ecdce996ba2cb0d0f8bf1361c6f-hover:HOVER, div#n2-ss-3 .n2-ss-layer .n2-font-b26c6ecdce996ba2cb0d0f8bf1361c6f-hover:ACTIVE, div#n2-ss-3 .n2-ss-layer .n2-font-b26c6ecdce996ba2cb0d0f8bf1361c6f-hover:FOCUS{}
+div#n2-ss-3 .n2-ss-layer .n2-font-65a1fdc9600f9bbb60a9dee50a19e48b-hover{font-family: 'Montserrat','Arial';color: #ffffff;font-size:87.5%;text-shadow: none;line-height: 1.5;font-weight: normal;font-style: normal;text-decoration: none;text-align: left;letter-spacing: normal;word-spacing: normal;text-transform: none;}
+div#n2-ss-3 .n2-ss-layer .n2-font-65a1fdc9600f9bbb60a9dee50a19e48b-hover:HOVER, div#n2-ss-3 .n2-ss-layer .n2-font-65a1fdc9600f9bbb60a9dee50a19e48b-hover:ACTIVE, div#n2-ss-3 .n2-ss-layer .n2-font-65a1fdc9600f9bbb60a9dee50a19e48b-hover:FOCUS{}
 
-div#n2-ss-3 .n2-ss-layer .n2-font-b26c6ecdce996ba2cb0d0f8bf1361c6f-hover{font-family: 'Quicksand','Arial';color: #ecbc00;font-size:87.5%;text-shadow: none;line-height: 1.5;font-weight: bold;font-style: normal;text-decoration: none;text-align: left;letter-spacing: normal;word-spacing: normal;text-transform: none;}
-div#n2-ss-3 .n2-ss-layer .n2-font-b26c6ecdce996ba2cb0d0f8bf1361c6f-hover:HOVER, div#n2-ss-3 .n2-ss-layer .n2-font-b26c6ecdce996ba2cb0d0f8bf1361c6f-hover:ACTIVE, div#n2-ss-3 .n2-ss-layer .n2-font-b26c6ecdce996ba2cb0d0f8bf1361c6f-hover:FOCUS{}
+div#n2-ss-3 .n2-ss-layer .n2-font-65a1fdc9600f9bbb60a9dee50a19e48b-hover{font-family: 'Montserrat','Arial';color: #ffffff;font-size:87.5%;text-shadow: none;line-height: 1.5;font-weight: normal;font-style: normal;text-decoration: none;text-align: left;letter-spacing: normal;word-spacing: normal;text-transform: none;}
+div#n2-ss-3 .n2-ss-layer .n2-font-65a1fdc9600f9bbb60a9dee50a19e48b-hover:HOVER, div#n2-ss-3 .n2-ss-layer .n2-font-65a1fdc9600f9bbb60a9dee50a19e48b-hover:ACTIVE, div#n2-ss-3 .n2-ss-layer .n2-font-65a1fdc9600f9bbb60a9dee50a19e48b-hover:FOCUS{}
 
-div#n2-ss-3 .n2-ss-layer .n2-font-b26c6ecdce996ba2cb0d0f8bf1361c6f-hover{font-family: 'Quicksand','Arial';color: #ecbc00;font-size:87.5%;text-shadow: none;line-height: 1.5;font-weight: bold;font-style: normal;text-decoration: none;text-align: left;letter-spacing: normal;word-spacing: normal;text-transform: none;}
-div#n2-ss-3 .n2-ss-layer .n2-font-b26c6ecdce996ba2cb0d0f8bf1361c6f-hover:HOVER, div#n2-ss-3 .n2-ss-layer .n2-font-b26c6ecdce996ba2cb0d0f8bf1361c6f-hover:ACTIVE, div#n2-ss-3 .n2-ss-layer .n2-font-b26c6ecdce996ba2cb0d0f8bf1361c6f-hover:FOCUS{}
-
-div#n2-ss-3 .n2-ss-layer .n2-font-b2430a454ef5ded891b5e54866648da3-hover{font-family: 'Quicksand','Arial';color: #ffffff;font-size:150%;text-shadow: none;line-height: 1.5;font-weight: normal;font-style: normal;text-decoration: none;text-align: center;letter-spacing: normal;word-spacing: normal;text-transform: none;}
-div#n2-ss-3 .n2-ss-layer .n2-font-b2430a454ef5ded891b5e54866648da3-hover:HOVER, div#n2-ss-3 .n2-ss-layer .n2-font-b2430a454ef5ded891b5e54866648da3-hover:ACTIVE, div#n2-ss-3 .n2-ss-layer .n2-font-b2430a454ef5ded891b5e54866648da3-hover:FOCUS{}
+div#n2-ss-3 .n2-ss-layer .n2-font-65a1fdc9600f9bbb60a9dee50a19e48b-hover{font-family: 'Montserrat','Arial';color: #ffffff;font-size:87.5%;text-shadow: none;line-height: 1.5;font-weight: normal;font-style: normal;text-decoration: none;text-align: left;letter-spacing: normal;word-spacing: normal;text-transform: none;}
+div#n2-ss-3 .n2-ss-layer .n2-font-65a1fdc9600f9bbb60a9dee50a19e48b-hover:HOVER, div#n2-ss-3 .n2-ss-layer .n2-font-65a1fdc9600f9bbb60a9dee50a19e48b-hover:ACTIVE, div#n2-ss-3 .n2-ss-layer .n2-font-65a1fdc9600f9bbb60a9dee50a19e48b-hover:FOCUS{}
 
 div#n2-ss-3 .n2-ss-layer .n2-font-b2430a454ef5ded891b5e54866648da3-hover{font-family: 'Quicksand','Arial';color: #ffffff;font-size:150%;text-shadow: none;line-height: 1.5;font-weight: normal;font-style: normal;text-decoration: none;text-align: center;letter-spacing: normal;word-spacing: normal;text-transform: none;}
 div#n2-ss-3 .n2-ss-layer .n2-font-b2430a454ef5ded891b5e54866648da3-hover:HOVER, div#n2-ss-3 .n2-ss-layer .n2-font-b2430a454ef5ded891b5e54866648da3-hover:ACTIVE, div#n2-ss-3 .n2-ss-layer .n2-font-b2430a454ef5ded891b5e54866648da3-hover:FOCUS{}
 
 div#n2-ss-3 .n2-ss-layer .n2-font-b2430a454ef5ded891b5e54866648da3-hover{font-family: 'Quicksand','Arial';color: #ffffff;font-size:150%;text-shadow: none;line-height: 1.5;font-weight: normal;font-style: normal;text-decoration: none;text-align: center;letter-spacing: normal;word-spacing: normal;text-transform: none;}
 div#n2-ss-3 .n2-ss-layer .n2-font-b2430a454ef5ded891b5e54866648da3-hover:HOVER, div#n2-ss-3 .n2-ss-layer .n2-font-b2430a454ef5ded891b5e54866648da3-hover:ACTIVE, div#n2-ss-3 .n2-ss-layer .n2-font-b2430a454ef5ded891b5e54866648da3-hover:FOCUS{}
+
+div#n2-ss-3 .n2-ss-layer .n2-font-b2430a454ef5ded891b5e54866648da3-hover{font-family: 'Quicksand','Arial';color: #ffffff;font-size:150%;text-shadow: none;line-height: 1.5;font-weight: normal;font-style: normal;text-decoration: none;text-align: center;letter-spacing: normal;word-spacing: normal;text-transform: none;}
+div#n2-ss-3 .n2-ss-layer .n2-font-b2430a454ef5ded891b5e54866648da3-hover:HOVER, div#n2-ss-3 .n2-ss-layer .n2-font-b2430a454ef5ded891b5e54866648da3-hover:ACTIVE, div#n2-ss-3 .n2-ss-layer .n2-font-b2430a454ef5ded891b5e54866648da3-hover:FOCUS{}
+
+div#n2-ss-3 .n2-ss-layer .n2-font-6573cfaabf2c45c6cc1f407f1881edfb-hover{font-family: 'Montserrat','Arial';color: #ffffff;font-size:225%;text-shadow: none;line-height: 1.5;font-weight: normal;font-style: normal;text-decoration: none;text-align: left;letter-spacing: normal;word-spacing: normal;text-transform: none;}
+div#n2-ss-3 .n2-ss-layer .n2-font-6573cfaabf2c45c6cc1f407f1881edfb-hover:HOVER, div#n2-ss-3 .n2-ss-layer .n2-font-6573cfaabf2c45c6cc1f407f1881edfb-hover:ACTIVE, div#n2-ss-3 .n2-ss-layer .n2-font-6573cfaabf2c45c6cc1f407f1881edfb-hover:FOCUS{}
+
+div#n2-ss-3 .n2-style-31350b47bda979b9ed0a2d383ba8c7e6-heading{background: #000000;background: RGBA(0,0,0,0);padding:5px 20px 5px 20px ;box-shadow: none;border-width: 0px;border-style: solid;border-color: #ffffff; border-color: RGBA(255,255,255,1);border-radius:0px;}
+div#n2-ss-3 .n2-style-31350b47bda979b9ed0a2d383ba8c7e6-heading:Hover, div#n2-ss-3 .n2-style-31350b47bda979b9ed0a2d383ba8c7e6-heading:ACTIVE, div#n2-ss-3 .n2-style-31350b47bda979b9ed0a2d383ba8c7e6-heading:FOCUS{}
 
